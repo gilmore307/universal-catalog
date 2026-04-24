@@ -26,7 +26,7 @@ function createRow(overrides) {
 }
 
 test('catalog kinds stay fixed to the documented set', () => {
-  assert.deepEqual(CATALOG_KINDS, ['field', 'template', 'repo', 'path', 'config', 'term', 'script']);
+  assert.deepEqual(CATALOG_KINDS, ['field', 'output', 'repo', 'path', 'config', 'term', 'script']);
   assert.equal(isCatalogKind('repo'), true);
   assert.equal(isCatalogKind('term'), true);
   assert.equal(isCatalogKind('script'), true);

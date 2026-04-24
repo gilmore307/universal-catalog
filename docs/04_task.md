@@ -2,9 +2,8 @@
 
 ## Queued
 
-- Continue extending the seed set as additional shared templates and cross-project fields are ratified.
+- Register the first real shared output templates when a project output or record artifact is ratified.
 - Extend the approved term set as additional specialized or project-defined terms are stabilized.
-- Decide whether to register additional reusable shared templates beyond the current docs and Codex task prompt templates.
 - Add a repeatable PostgreSQL-backed verification path in local tooling or CI.
 - Add the first real consumer integration example for the `src/` helper surface.
 
@@ -15,9 +14,10 @@
 - Registered the first ratified shared workflow slot fields for completion-receipt templates in `storage/dictionary/seed.sql`.
 - Registered the first ratified shared workflow slot fields for acceptance-receipt templates in `storage/dictionary/seed.sql`.
 - Registered the first ratified shared workflow slot fields for maintenance-output templates in `storage/dictionary/seed.sql`.
-- Added the first approved template files under `storage/templates/` and registered the fixed-location root README and docs spine templates in `storage/dictionary/seed.sql`.
-- Added the canonical reusable `codex_task_prompt.md` template under `storage/templates/` and registered it in `storage/dictionary/seed.sql`.
-- Registered `script` entries for the canonical template files under `storage/templates/` so automation can resolve full addresses without hardcoding them.
+- Clarified that markdown documentation templates and the Codex task prompt stay in their relevant skills rather than in `universal-catalog`.
+- Reserved `storage/templates/` for future project-related output templates instead of skill-local markdown files.
+- Added a dedicated `output` kind for catalog-owned output templates.
+- Added a dedicated `script` kind and registered the current helper source-file addresses under `src/` as full absolute locators for automation.
 - Added a dedicated `term` kind and registered the first approved term definitions in `storage/dictionary/seed.sql`.
 
 ## Notes

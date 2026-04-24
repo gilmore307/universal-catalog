@@ -1,14 +1,14 @@
 # universal-catalog
 
-Shared catalog for server-wide field definitions, output templates, approved terms, script-facing locators, and other stable referenced values used by future trading-oriented projects.
+Shared catalog for server-wide field definitions, output templates, approved terms, script-facing source locators, and other stable referenced values used by future trading-oriented projects.
 
 This repository is managed by OpenClaw. OpenClaw owns project route, docs, acceptance, and maintenance. Codex may implement bounded tasks when explicitly dispatched.
 
 ## Purpose
 
 - centralize server-wide catalog items that should be reviewed instead of duplicated
-- assign each catalog item a stable random id such as `pth_A7K3P2Q9` or `scr_JI36LVNH`
-- let downstream code dereference catalog values so path, script locator, field, template, and approved-term changes stay cheap
+- assign each catalog item a stable random id such as `pth_A7K3P2Q9`, `out_T7M2KQ4P`, or `scr_YO00DVVP`
+- let downstream code dereference catalog values so path, script locator, field, output, and approved-term changes stay cheap
 
 ## Project focus
 
@@ -16,17 +16,17 @@ This repository is managed by OpenClaw. OpenClaw owns project route, docs, accep
 - output templates
 - approved term definitions
 - repository identifiers
-- path or locator values that should be referenced through stable ids
-- script-facing full-address locators for automation
+- path values that should be referenced through stable ids
+- script-facing full-address locators for concrete source files used by automation
 - shared non-sensitive configuration values such as the default timezone
 - lightweight helper code for catalog lookup
 
-Do not store secrets, security-sensitive configuration values, or runtime trading data here.
+Do not store secrets, security-sensitive configuration values, runtime trading data, or skill-local markdown templates here.
 
 ## Current kind set
 
 - `field`
-- `template`
+- `output`
 - `repo`
 - `path`
 - `config`
@@ -37,9 +37,13 @@ Do not store secrets, security-sensitive configuration values, or runtime tradin
 
 - `docs/` — formal project docs spine
 - `storage/dictionary/` — SQL schema and seed data for active catalog items
-- `storage/templates/` — template files referenced by catalog entries
+- `storage/templates/` — output template files referenced by catalog entries
 - `src/` — read-only helper surface for catalog lookup
 
 ## Current state
 
-This repository currently defines the documentation spine, the PostgreSQL register skeleton, an initial read-only Node helper surface under `src/`, and the first approved template files under `storage/templates/`. The seed now includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, fixed-location repository documentation templates, script entries that provide full addresses for canonical template files used by automation, the first reusable Codex task prompt template, and the first approved term definitions.
+This repository currently defines the documentation spine, the PostgreSQL register skeleton, an initial read-only Node helper surface under `src/`, and the storage boundary for future output templates under `storage/templates/`.
+
+The active seed currently includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, script entries that provide full addresses for the current helper source files under `src/`, and the first approved term definitions.
+
+Markdown documentation templates and Codex prompt templates now stay in their relevant skills instead of being registered here.

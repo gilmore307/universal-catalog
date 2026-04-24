@@ -11,4 +11,6 @@ PostgreSQL-oriented SQL source of truth for the active catalog register.
 
 This directory keeps only the active register. Change history lives in Git rather than a separate SQL history table. SQLite is intentionally not a target for this repository.
 
-The seed bootstraps the register with field entries for the `catalog_items` column names themselves, base repo/path/config entries, the first ratified shared workflow slot fields for execution-key, completion-receipt, acceptance-receipt, and maintenance-output templates, the first registered fixed-location documentation template files, `script` entries that provide full addresses for canonical template files used by automation, the canonical reusable Codex task prompt template, and the first approved term definitions.
+The seed bootstraps the register with field entries for the `catalog_items` column names themselves, base repo/path/config entries, the first ratified shared workflow slot fields for execution-key, completion-receipt, acceptance-receipt, and maintenance-output templates, `script` entries that provide full addresses for the current helper source files under `src/`, and the first approved term definitions.
+
+No `output` rows are registered yet. Markdown documentation templates and prompt templates are intentionally kept out of this register.

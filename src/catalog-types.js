@@ -2,7 +2,7 @@
 
 const CATALOG_KINDS = Object.freeze([
   'field',
-  'template',
+  'output',
   'repo',
   'path',
   'config',

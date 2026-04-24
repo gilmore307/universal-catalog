@@ -4,11 +4,11 @@
 
 1. Confirm the item belongs to the shared server-wide catalog boundary.
 2. Check that no existing active item already covers the same concept.
-3. Assign a stable random id with the correct prefix (`fld_`, `tpl_`, `rep_`, `pth_`, `cfg_`, `trm_`, or `scr_`).
+3. Assign a stable random id with the correct prefix (`fld_`, `out_`, `rep_`, `pth_`, `cfg_`, `trm_`, or `scr_`).
 4. Add or update the supporting artifact:
    - SQL row in `storage/dictionary/seed.sql`
-   - template file in `storage/templates/` when `kind = template`
-   - matching script row when automation needs the full direct address for that template file
+   - output template file in `storage/templates/` when `kind = output`
+   - full source-file address in the active row when `kind = script`
    - text definition in the active row when `kind = term`
 5. Update docs when the new item changes scope, workflow, acceptance, or project decisions.
 
@@ -24,7 +24,7 @@ A new catalog item is ready for review only if:
 
 1. Confirm the item identity is unchanged; if the concept changed, create a new id instead.
 2. Update the active row in `storage/dictionary/seed.sql`.
-3. Update any referenced template file when the payload points to a template path.
+3. Update any referenced output template file when the payload points to an output file under `storage/templates/`.
 4. Update docs only when repository boundary, workflow, or decisions changed.
 
 ### WF-002 acceptance

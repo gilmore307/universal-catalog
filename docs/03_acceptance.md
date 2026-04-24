@@ -9,7 +9,8 @@ A repository change is accepted only if:
 - `storage/dictionary/schema.sql` applies cleanly
 - `storage/dictionary/seed.sql` applies cleanly after the schema
 - catalog item ids use the expected type prefixes and remain stable once introduced
-- templates referenced by file path actually exist when present in the seed data
+- output files referenced by catalog entries actually exist when present in the seed data
+- script addresses referenced by catalog entries actually exist when present in the seed data
 - `src/` helpers remain read-only and pass their local tests when that surface changes
 
 ## Required verification

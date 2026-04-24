@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS catalog_items (
   id TEXT PRIMARY KEY,
-  kind TEXT NOT NULL CHECK (kind IN ('field', 'template', 'repo', 'path', 'config', 'term', 'script')),
+  kind TEXT NOT NULL CHECK (kind IN ('field', 'output', 'repo', 'path', 'config', 'term', 'script')),
   key TEXT NOT NULL UNIQUE,
   payload_format TEXT NOT NULL CHECK (payload_format IN ('text', 'file')),
   payload TEXT NOT NULL,

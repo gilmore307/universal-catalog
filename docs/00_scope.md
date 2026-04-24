@@ -10,8 +10,8 @@ Define the shared catalog layer for server-wide values that future trading-orien
 - server-wide output template registrations
 - server-wide approved term definitions and glossary entries
 - repository identifiers that should be shared consistently across services
-- path or locator values that should be addressed through stable catalog ids
-- script-facing full-address locators for automation that reuses canonical files
+- path values that should be addressed through stable catalog ids
+- script-facing full-address locators for concrete source files used by automation
 - shared non-sensitive configuration defaults such as timezone
 - SQL storage for the active catalog register
 - repository docs and a small read-only helper surface for catalog lookup
@@ -22,7 +22,8 @@ Define the shared catalog layer for server-wide values that future trading-orien
 - sensitive configuration values such as passwords, tokens, or private keys
 - runtime trading, order, position, or market data
 - project-specific business logic
-- source-code import indirection or module resolution tricks
+- source-code import indirection or module resolution tricks beyond explicit script addresses
+- skill-local markdown templates such as project-doc templates or Codex prompt templates
 - non-catalog documentation debates unrelated to repository purpose
 
 ## Owner Intent

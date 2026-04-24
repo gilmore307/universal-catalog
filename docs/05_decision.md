@@ -4,18 +4,18 @@
 
 - **Date:** 2026-04-23
 - **Decision:** Keep server-wide catalog content in its own repository instead of burying it inside a single application repository.
-- **Reason:** Shared fields, templates, and stable references should be reviewed in one place and reused cleanly across future trading-oriented services.
+- **Reason:** Shared fields, outputs, and stable references should be reviewed in one place and reused cleanly across future trading-oriented services.
 
 ## DEC-002 Position the repository as `universal-catalog`
 
 - **Date:** 2026-04-23
-- **Decision:** Treat the repository as `universal-catalog` rather than `universal-dictionary` because the boundary includes output templates in addition to dictionary-style entries.
-- **Reason:** `catalog` matches the actual scope better and leaves room for shared template and path registrations without forcing awkward naming.
+- **Decision:** Treat the repository as `universal-catalog` rather than `universal-dictionary` because the boundary includes output-style artifacts in addition to dictionary-style entries.
+- **Reason:** `catalog` matches the actual scope better and leaves room for shared output, script, and path registrations without forcing awkward naming.
 
 ## DEC-003 Use stable random ids for catalog identity
 
 - **Date:** 2026-04-23
-- **Decision:** Use stable random ids with type prefixes such as `pth_`, `tpl_`, and `fld_` as the immutable identity layer.
+- **Decision:** Use stable random ids with type prefixes such as `pth_`, `out_`, `scr_`, and `fld_` as the immutable identity layer.
 - **Reason:** Human-readable keys can change. Stable opaque ids keep downstream code insulated from naming and payload edits.
 
 ## DEC-004 Keep only the active register in SQL
@@ -34,8 +34,8 @@
 
 - **Date:** 2026-04-23
 - **Decision:** Start the active register with five allowed `kind` values: `field`, `template`, `repo`, `path`, and `config`.
-- **Reason:** This covers the initial shared boundary cleanly without prematurely exploding the catalog taxonomy.
-- **Later change:** `DEC-010` later expanded the current kind set by adding `term`, and `DEC-012` later expanded it again by adding `script`.
+- **Reason:** This covered the initial shared boundary cleanly without prematurely exploding the catalog taxonomy.
+- **Later change:** the current set later replaced `template` with `output` and added both `term` and `script`.
 
 ## DEC-007 Keep the initial helper surface read-only and executor-injected
 
@@ -49,11 +49,11 @@
 - **Decision:** When a reusable cross-project workflow template is ratified, register its canonical shared field names in `universal-catalog` under `kind = field`.
 - **Reason:** This keeps skill-template slot names and catalog governance aligned without pretending undecided wrappers, enums, or full schemas are already standardized.
 
-## DEC-009 Register fixed-location repository documentation templates as template items
+## DEC-009 Keep fixed-location repository markdown templates in skills
 
 - **Date:** 2026-04-24
-- **Decision:** Register the canonical root `README.md` template and the fixed-location docs spine templates (`docs/00_scope.md` through `docs/06_memory.md`) as `kind = template` items with file payloads under `storage/templates/`.
-- **Reason:** These are stable reusable file-level artifacts. Registering the files themselves is cleaner than treating every internal heading as a catalog field.
+- **Decision:** Keep markdown templates for files such as `README.md` and `docs/00_scope.md` through `docs/06_memory.md` in their relevant skills instead of registering them in `universal-catalog`.
+- **Reason:** Those markdown files are skill-local guidance artifacts, not shared catalog-owned output templates.
 
 ## DEC-010 Add a dedicated `term` kind for approved term definitions
 
@@ -61,14 +61,20 @@
 - **Decision:** Add `term` as an allowed `kind` so `universal-catalog` can register approved specialized terms and self-defined project terms with text definitions.
 - **Reason:** Terms and meanings are stable shared reference material, and they should not be forced awkwardly into `field` or `config` entries.
 
-## DEC-011 Register the reusable Codex task prompt as a canonical template item
+## DEC-011 Keep the Codex task prompt markdown template in skills
 
 - **Date:** 2026-04-24
-- **Decision:** Register `codex_task_prompt.md` as a `kind = template` item with a file payload under `storage/templates/` and keep local skill copies aligned to that canonical content.
-- **Reason:** The Codex task prompt is a reusable file-level artifact across OpenClaw/Codex orchestration flows, so it fits the template boundary better than ad hoc duplicated local copies.
+- **Decision:** Keep `codex_task_prompt.md` in the relevant OpenClaw/Codex skills instead of registering it as a catalog item.
+- **Reason:** It is skill-local markdown instruction material, not a catalog-owned project output template.
 
-## DEC-012 Register `script` entries for script-consumed canonical template files
+## DEC-012 Use `script` for full source-file addresses consumed by automation
 
 - **Date:** 2026-04-24
-- **Decision:** When canonical template files under `storage/templates/` need stable direct lookup by scripts or automation, register matching `kind = script` items that store the full file address.
-- **Reason:** `template` items identify the reusable artifact, while matching `script` items give automation a stable complete locator without overloading generic `path` entries.
+- **Decision:** Use `kind = script` for concrete full addresses to source files that automation may need directly, such as helper files under `src/`.
+- **Reason:** Script locators are not generic paths; they are automation-facing references to specific source files and should be explicit.
+
+## DEC-013 Reserve `storage/templates/` for output templates
+
+- **Date:** 2026-04-24
+- **Decision:** Use `storage/templates/` only for catalog-owned output templates and register those files under `kind = output` when they are real.
+- **Reason:** This keeps output artifacts separate from skill-local markdown templates and preserves a cleaner catalog boundary.
