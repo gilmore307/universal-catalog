@@ -60,11 +60,11 @@ VALUES
   ('trm_5HE1ZLG6', 'term', 'OPENCLAW', 'text', 'Project sentinel and orchestration layer that owns project route, docs, dispatch, review, and acceptance.', 'canonical shared definition for OpenClaw'),
   ('trm_RXUP2T7D', 'term', 'CODEX', 'text', 'Coding executor used for bounded implementation tasks under OpenClaw supervision.', 'canonical shared definition for Codex in this workspace'),
   ('trm_QLKAMITP', 'term', 'UNIVERSAL_CATALOG', 'text', 'Shared catalog repository for stable server-wide referenced values, approved outputs, source locators, and approved terms.', 'canonical shared definition for universal-catalog'),
-  ('trm_W8Q2K6LP', 'term', 'WINDOWS_ACCESS_BOOTSTRAP', 'text', 'Windows access bootstrap project for joining VPN access, onboarding an OpenClaw node, mounting an SMB share, and opening the dashboard.', 'canonical shared definition for the windows-access-bootstrap project boundary'),
+  ('trm_W8Q2K6LP', 'term', 'NETWORK_FRAMEWORK', 'text', 'network-framework project for joining VPN access, onboarding an OpenClaw node, mounting an SMB share, and opening the dashboard.', 'canonical shared definition for the network-framework project boundary'),
   ('rep_H6S3V8LA', 'repo', 'UNIVERSAL_CATALOG_REPO', 'text', 'universal-catalog', 'canonical repository name for this catalog'),
-  ('rep_N3J7X4MD', 'repo', 'WINDOWS_ACCESS_BOOTSTRAP_REPO', 'text', 'windows-access-bootstrap', 'canonical repository name for the Windows access bootstrap project'),
+  ('rep_N3J7X4MD', 'repo', 'NETWORK_FRAMEWORK_REPO', 'text', 'network-framework', 'canonical repository name for the network-framework project'),
   ('pth_C4X8N2ME', 'path', 'UNIVERSAL_CATALOG_ROOT_PATH', 'text', '/root/projects/universal-catalog', 'repository root path for the universal-catalog checkout'),
-  ('pth_R6V1C9TE', 'path', 'WINDOWS_ACCESS_BOOTSTRAP_ROOT_PATH', 'text', '/root/projects/windows-access-bootstrap', 'repository root path for the Windows access bootstrap checkout'),
+  ('pth_R6V1C9TE', 'path', 'NETWORK_FRAMEWORK_ROOT_PATH', 'text', '/root/projects/network-framework', 'repository root path for the network-framework checkout'),
   ('cfg_J7D1K5RP', 'config', 'DEFAULT_TIMEZONE', 'text', 'America/New_York', 'default shared timezone for this server');
 
 COMMIT;
