@@ -36,8 +36,8 @@ None.
 - added a dedicated `script` kind and registered the current helper source-file addresses under `src/` as full absolute locators for automation
 - added a dedicated `term` kind and registered the first approved term definitions in the catalog register
 - registered the first secret-alias config reference and added a read-only helper path for resolving secret aliases through the local secrets registry
-- configured the local active PostgreSQL database named `universal-catalog` and resolved its URL through the `universal-catalog/database-url` secret alias
-- replaced schema/seed rebuild maintenance with append-only migrations plus the `schema_migrations` ledger and `catalog_item_revisions` snapshots
+- configured the local active PostgreSQL database named `openclaw` and resolved its URL through the `openclaw/database-url` secret alias
+- replaced schema/seed rebuild maintenance with append-only migrations plus the `schema_migrations` ledger and `universal_catalog_revisions` snapshots
 
 ## Notes
 

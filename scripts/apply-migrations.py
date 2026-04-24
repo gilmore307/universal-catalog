@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Apply universal-catalog PostgreSQL migrations exactly once.
 
-The database URL is read from UNIVERSAL_CATALOG_DATABASE_URL when set, otherwise
-from the local secret alias file /root/secrets/universal-catalog/database-url.
+The database URL is read from OPENCLAW_DATABASE_URL when set, otherwise
+from the local secret alias file /root/secrets/openclaw/database-url.
 """
 
 from __future__ import annotations
@@ -16,17 +16,17 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MIGRATIONS_DIR = REPO_ROOT / "storage" / "dictionary" / "migrations"
-DEFAULT_DB_URL_FILE = Path("/root/secrets/universal-catalog/database-url")
+DEFAULT_DB_URL_FILE = Path("/root/secrets/openclaw/database-url")
 
 
 def database_url() -> str:
-    value = os.environ.get("UNIVERSAL_CATALOG_DATABASE_URL", "").strip()
+    value = os.environ.get("OPENCLAW_DATABASE_URL", "").strip()
     if value:
         return value
     if DEFAULT_DB_URL_FILE.exists():
         return DEFAULT_DB_URL_FILE.read_text(encoding="utf-8").strip()
     raise SystemExit(
-        "UNIVERSAL_CATALOG_DATABASE_URL is unset and "
+        "OPENCLAW_DATABASE_URL is unset and "
         f"{DEFAULT_DB_URL_FILE} does not exist"
     )
 

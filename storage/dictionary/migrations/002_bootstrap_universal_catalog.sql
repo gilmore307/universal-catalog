@@ -2,16 +2,16 @@
 -- Target engine: PostgreSQL.
 
 -- Bootstrap fields for the catalog register itself, the first ratified shared workflow slots, and the default shared status vocabularies.
-INSERT INTO catalog_items (id, kind, key, payload_format, payload, note)
+INSERT INTO universal_catalog (id, kind, key, payload_format, payload, note)
 VALUES
-  ('fld_A7K3P2Q9', 'field', 'CATALOG_ITEM_ID', 'text', 'id', 'canonical column name for catalog_items.id'),
-  ('fld_M4N8X2KD', 'field', 'CATALOG_ITEM_KIND', 'text', 'kind', 'canonical column name for catalog_items.kind'),
-  ('fld_R7P1C6LW', 'field', 'CATALOG_ITEM_KEY', 'text', 'key', 'canonical column name for catalog_items.key'),
-  ('fld_T9V2H5QS', 'field', 'CATALOG_ITEM_PAYLOAD_FORMAT', 'text', 'payload_format', 'canonical column name for catalog_items.payload_format'),
-  ('fld_B6J4N8XP', 'field', 'CATALOG_ITEM_PAYLOAD', 'text', 'payload', 'canonical column name for catalog_items.payload'),
-  ('fld_D3W7K1RM', 'field', 'CATALOG_ITEM_NOTE', 'text', 'note', 'canonical column name for catalog_items.note'),
-  ('fld_P8L2C4TY', 'field', 'CATALOG_ITEM_CREATED_AT', 'text', 'created_at', 'canonical column name for catalog_items.created_at'),
-  ('fld_Q5F9M2NZ', 'field', 'CATALOG_ITEM_UPDATED_AT', 'text', 'updated_at', 'canonical column name for catalog_items.updated_at'),
+  ('fld_A7K3P2Q9', 'field', 'CATALOG_ITEM_ID', 'text', 'id', 'canonical column name for universal_catalog.id'),
+  ('fld_M4N8X2KD', 'field', 'CATALOG_ITEM_KIND', 'text', 'kind', 'canonical column name for universal_catalog.kind'),
+  ('fld_R7P1C6LW', 'field', 'CATALOG_ITEM_KEY', 'text', 'key', 'canonical column name for universal_catalog.key'),
+  ('fld_T9V2H5QS', 'field', 'CATALOG_ITEM_PAYLOAD_FORMAT', 'text', 'payload_format', 'canonical column name for universal_catalog.payload_format'),
+  ('fld_B6J4N8XP', 'field', 'CATALOG_ITEM_PAYLOAD', 'text', 'payload', 'canonical column name for universal_catalog.payload'),
+  ('fld_D3W7K1RM', 'field', 'CATALOG_ITEM_NOTE', 'text', 'note', 'canonical column name for universal_catalog.note'),
+  ('fld_P8L2C4TY', 'field', 'CATALOG_ITEM_CREATED_AT', 'text', 'created_at', 'canonical column name for universal_catalog.created_at'),
+  ('fld_Q5F9M2NZ', 'field', 'CATALOG_ITEM_UPDATED_AT', 'text', 'updated_at', 'canonical column name for universal_catalog.updated_at'),
   ('fld_7X5H7N6Y', 'field', 'TASK_IDENTITY', 'text', 'task_identity', 'canonical shared field name for task identity slots'),
   ('fld_ZGTS8P3D', 'field', 'WORKFLOW_IDENTITY', 'text', 'workflow_identity', 'canonical shared field name for workflow identity slots'),
   ('fld_4YALJN0B', 'field', 'REPOSITORY_PATH', 'text', 'repository_path', 'canonical shared field name for repository path slots'),
@@ -108,7 +108,7 @@ VALUES
   ('cfg_N9K3V5QA', 'config', 'NETWORK_FRAMEWORK_SMB_REMOTE_PATH_KEY', 'text', 'smbRemotePath', 'approved local config key for the network-framework SMB UNC path'),
   ('cfg_B4L8T2XC', 'config', 'NETWORK_FRAMEWORK_DASHBOARD_URL_KEY', 'text', 'dashboardUrl', 'approved local config key for the network-framework dashboard URL'),
   ('cfg_X6M1R9PW', 'config', 'NETWORK_FRAMEWORK_COMPANION_STATUS_URL_KEY', 'text', 'companionStatusUrl', 'approved local config key for the network-framework read-only companion status URL'),
-  ('cfg_U8C2D6YA', 'config', 'UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS', 'text', 'universal-catalog/database-url', 'approved config key for the active universal-catalog PostgreSQL database URL secret alias; the catalog stores the alias reference, not connection secret material')
+  ('cfg_U8C2D6YA', 'config', 'OPENCLAW_DATABASE_URL_SECRET_ALIAS', 'text', 'openclaw/database-url', 'approved config key for the active OpenClaw PostgreSQL database URL secret alias; the catalog stores the alias reference, not connection secret material')
 ON CONFLICT (id) DO UPDATE SET
   kind = EXCLUDED.kind,
   key = EXCLUDED.key,

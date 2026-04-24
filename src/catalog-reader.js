@@ -12,12 +12,12 @@ SELECT
   note,
   created_at,
   updated_at
-FROM catalog_items
+FROM universal_catalog
 `;
 
 function mapCatalogItemRow(row) {
   if (!row || typeof row !== 'object') {
-    throw new Error('Cannot map catalog_items row: expected an object row');
+    throw new Error('Cannot map universal_catalog row: expected an object row');
   }
 
   return {

@@ -1,11 +1,11 @@
 # migrations
 
-Append-only PostgreSQL migrations for the active `universal-catalog` database.
+Append-only PostgreSQL migrations for the active `openclaw` database.
 
 ## Files
 
 - `001_create_catalog_register.sql` — creates the migration ledger, active catalog table, revision snapshot table, indexes, and triggers.
-- `002_bootstrap_catalog_items.sql` — loads the currently approved bootstrap catalog rows.
+- `002_bootstrap_universal_catalog.sql` — loads the currently approved bootstrap catalog rows.
 
 ## Boundary
 

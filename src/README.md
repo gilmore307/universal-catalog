@@ -19,7 +19,7 @@ Read-only helper surface for `universal-catalog`.
 
 ## Current boundary
 
-- read-only queries against `catalog_items`
+- read-only queries against `universal_catalog`
 - read-only lookup of local secret aliases through the secrets registry
 - no connection management
 - no registration or write paths

@@ -34,7 +34,7 @@ Keep globally shared references explicit, stable, and cheap to change. The repos
 ## Boundary Rules
 
 - Only server-wide reusable values and artifacts belong in this repository.
-- The active register lives in the local PostgreSQL database named `universal-catalog`; `storage/dictionary/migrations/` owns append-only schema/data migrations used to initialize and evolve it.
+- The active `universal_catalog` table lives in the local PostgreSQL database named `openclaw`; `storage/dictionary/migrations/` owns append-only schema/data migrations used to initialize and evolve it.
 - Output template files belong under `storage/templates/` only when this repository truly owns them.
 - Script entries point to concrete source files that automation may address directly.
 - `src/` stays read-only and executor-injected rather than growing into connection management or write-side administration.

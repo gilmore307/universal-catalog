@@ -21,7 +21,7 @@ function createRow(overrides) {
     key: 'CATALOG_ITEM_ID',
     payload_format: 'text',
     payload: 'id',
-    note: 'canonical column name for catalog_items.id',
+    note: 'canonical column name for universal_catalog.id',
     created_at: '2026-04-23T00:00:00.000Z',
     updated_at: '2026-04-23T00:00:00.000Z',
     ...overrides,
@@ -51,13 +51,13 @@ test('mapCatalogItemRow converts snake_case columns into readable JS keys', () =
     key: 'CATALOG_ITEM_ID',
     payloadFormat: 'text',
     payload: 'id',
-    note: 'canonical column name for catalog_items.id',
+    note: 'canonical column name for universal_catalog.id',
     createdAt: '2026-04-23T00:00:00.000Z',
     updatedAt: '2026-04-23T00:00:00.000Z',
   });
 });
 
-test('getItemById uses a read-only catalog_items query', async () => {
+test('getItemById uses a read-only universal_catalog query', async () => {
   const calls = [];
   const reader = createCatalogReader(async (sql, params) => {
     calls.push({ sql, params });
@@ -67,7 +67,7 @@ test('getItemById uses a read-only catalog_items query', async () => {
   const item = await reader.getItemById('fld_A7K3P2Q9');
 
   assert.equal(item.id, 'fld_A7K3P2Q9');
-  assert.match(calls[0].sql, /FROM catalog_items/);
+  assert.match(calls[0].sql, /FROM universal_catalog/);
   assert.match(calls[0].sql, /WHERE id = \$1/);
   assert.deepEqual(calls[0].params, ['fld_A7K3P2Q9']);
 });

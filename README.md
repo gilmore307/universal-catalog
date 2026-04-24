@@ -51,7 +51,7 @@ Do not store secrets, security-sensitive configuration values, runtime applicati
 
 ## Current state
 
-This repository currently defines the documentation spine, the PostgreSQL active register migration path, an initial read-only Node helper surface under `src/`, and the storage boundary for future output templates under `storage/templates/`.
+This repository currently defines the documentation spine, the PostgreSQL active `universal_catalog` table migration path, an initial read-only Node helper surface under `src/`, and the storage boundary for future output templates under `storage/templates/`.
 
 The initial bootstrap migration currently includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, default status vocabulary values for task, review, and maintenance artifacts, script entries that provide full addresses for the current helper source files under `src/`, the first approved term definitions, and the first config entry that points to a local secrets-registry alias instead of storing a secret value.
 

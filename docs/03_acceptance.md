@@ -5,7 +5,7 @@
 Current accepted repository slice:
 
 - fixed docs spine for project boundary and decisions
-- PostgreSQL migrations and migration runner for the long-lived active catalog register
+- PostgreSQL migrations and migration runner for the long-lived active `universal_catalog` table
 - catalog-owned output-template storage boundary under `storage/templates/`
 - a small read-only helper surface under `src/`
 
@@ -16,7 +16,7 @@ Current accepted repository slice:
 A storage change is acceptable only if:
 
 - the item is truly server-wide rather than project-local
-- `id` and `key` remain unique in the active register
+- `id` and `key` remain unique in the active `universal_catalog` table
 - `kind`, `payload_format`, and `payload` match the actual artifact
 - any referenced output file or script address actually exists
 
@@ -41,13 +41,13 @@ A docs-only change is acceptable only if:
 
 ## Verification Commands
 
-Run these commands against the local active PostgreSQL catalog database named `universal-catalog` from the repository root.
-The local host resolves `UNIVERSAL_CATALOG_DATABASE_URL` from the secret alias registered by `UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS` (`universal-catalog/database-url`).
+Run these commands against the local active PostgreSQL database named `openclaw` from the repository root.
+The local host resolves `OPENCLAW_DATABASE_URL` from the secret alias registered by `OPENCLAW_DATABASE_URL_SECRET_ALIAS` (`openclaw/database-url`).
 
 ```bash
 python3 scripts/apply-migrations.py
-psql "$UNIVERSAL_CATALOG_DATABASE_URL" -Atc "SELECT COUNT(*), COUNT(DISTINCT key), COUNT(DISTINCT id) FROM catalog_items;"
-psql "$UNIVERSAL_CATALOG_DATABASE_URL" -Atc "SELECT version, checksum_sha256 FROM schema_migrations ORDER BY version;"
+psql "$OPENCLAW_DATABASE_URL" -Atc "SELECT COUNT(*), COUNT(DISTINCT key), COUNT(DISTINCT id) FROM universal_catalog;"
+psql "$OPENCLAW_DATABASE_URL" -Atc "SELECT version, checksum_sha256 FROM schema_migrations ORDER BY version;"
 ```
 
 When `src/` changes, also run:
@@ -63,7 +63,7 @@ Do not maintain a second long-lived acceptance database. The local active databa
 - diff review for storage, docs, and helper-boundary changes
 - successful migration application output
 - migration ledger output from `schema_migrations`
-- note that `UNIVERSAL_CATALOG_DATABASE_URL` came from the local active catalog database alias
+- note that `OPENCLAW_DATABASE_URL` came from the local active catalog database alias
 - `src/catalog-reader.test.js` output when `src/` changed
 - explicit note that a new or updated item is truly shared rather than project-local
 - explicit note when docs or decisions changed because repository boundary moved
@@ -74,7 +74,7 @@ Reject a change when:
 
 - a supposedly shared item is actually project-local
 - an update silently changes the meaning of an existing stable id
-- the active register breaks migration application or ledger checksum validation
+- the active `universal_catalog` table breaks migration application or ledger checksum validation
 - a maintained directory loses its boundary README
 - docs and storage drift out of sync about what this repository owns
 - helper code quietly expands into write-side behavior or hides catalog access behind opaque runtime state

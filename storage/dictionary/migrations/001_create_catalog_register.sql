@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS schema_migrations (
   applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS catalog_items (
+CREATE TABLE IF NOT EXISTS universal_catalog (
   id TEXT PRIMARY KEY,
   kind TEXT NOT NULL CHECK (kind IN ('field', 'output', 'repo', 'path', 'config', 'term', 'script', 'task_lifecycle_state', 'review_readiness', 'acceptance_outcome', 'test_status', 'maintenance_status', 'docs_status')),
   key TEXT NOT NULL UNIQUE,
@@ -19,13 +19,13 @@ CREATE TABLE IF NOT EXISTS catalog_items (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_catalog_items_kind
-ON catalog_items(kind);
+CREATE INDEX IF NOT EXISTS idx_universal_catalog_kind
+ON universal_catalog(kind);
 
-CREATE INDEX IF NOT EXISTS idx_catalog_items_updated_at
-ON catalog_items(updated_at);
+CREATE INDEX IF NOT EXISTS idx_universal_catalog_updated_at
+ON universal_catalog(updated_at);
 
-CREATE TABLE IF NOT EXISTS catalog_item_revisions (
+CREATE TABLE IF NOT EXISTS universal_catalog_revisions (
   revision_id BIGSERIAL PRIMARY KEY,
   item_id TEXT NOT NULL,
   operation TEXT NOT NULL CHECK (operation IN ('insert', 'update')),
@@ -37,13 +37,13 @@ CREATE TABLE IF NOT EXISTS catalog_item_revisions (
   recorded_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE INDEX IF NOT EXISTS idx_catalog_item_revisions_item_id
-ON catalog_item_revisions(item_id);
+CREATE INDEX IF NOT EXISTS idx_universal_catalog_revisions_item_id
+ON universal_catalog_revisions(item_id);
 
-CREATE INDEX IF NOT EXISTS idx_catalog_item_revisions_recorded_at
-ON catalog_item_revisions(recorded_at);
+CREATE INDEX IF NOT EXISTS idx_universal_catalog_revisions_recorded_at
+ON universal_catalog_revisions(recorded_at);
 
-CREATE OR REPLACE FUNCTION set_catalog_item_updated_at()
+CREATE OR REPLACE FUNCTION set_universal_catalog_updated_at()
 RETURNS TRIGGER AS $$
 BEGIN
   IF ROW(NEW.kind, NEW.key, NEW.payload_format, NEW.payload, NEW.note)
@@ -56,11 +56,11 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION record_catalog_item_revision()
+CREATE OR REPLACE FUNCTION record_universal_catalog_revision()
 RETURNS TRIGGER AS $$
 BEGIN
   IF TG_OP = 'INSERT' THEN
-    INSERT INTO catalog_item_revisions (item_id, operation, kind, key, payload_format, payload, note)
+    INSERT INTO universal_catalog_revisions (item_id, operation, kind, key, payload_format, payload, note)
     VALUES (NEW.id, 'insert', NEW.kind, NEW.key, NEW.payload_format, NEW.payload, NEW.note);
     RETURN NEW;
   END IF;
@@ -69,7 +69,7 @@ BEGIN
     IF ROW(NEW.kind, NEW.key, NEW.payload_format, NEW.payload, NEW.note)
        IS DISTINCT FROM
        ROW(OLD.kind, OLD.key, OLD.payload_format, OLD.payload, OLD.note) THEN
-      INSERT INTO catalog_item_revisions (item_id, operation, kind, key, payload_format, payload, note)
+      INSERT INTO universal_catalog_revisions (item_id, operation, kind, key, payload_format, payload, note)
       VALUES (NEW.id, 'update', NEW.kind, NEW.key, NEW.payload_format, NEW.payload, NEW.note);
     END IF;
     RETURN NEW;
@@ -79,23 +79,23 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-DROP TRIGGER IF EXISTS trg_catalog_items_updated_at ON catalog_items;
-CREATE TRIGGER trg_catalog_items_updated_at
-BEFORE UPDATE ON catalog_items
+DROP TRIGGER IF EXISTS trg_universal_catalog_updated_at ON universal_catalog;
+CREATE TRIGGER trg_universal_catalog_updated_at
+BEFORE UPDATE ON universal_catalog
 FOR EACH ROW
-EXECUTE FUNCTION set_catalog_item_updated_at();
+EXECUTE FUNCTION set_universal_catalog_updated_at();
 
-DROP TRIGGER IF EXISTS trg_catalog_items_revision ON catalog_items;
-CREATE TRIGGER trg_catalog_items_revision
-AFTER INSERT OR UPDATE ON catalog_items
+DROP TRIGGER IF EXISTS trg_universal_catalog_revision ON universal_catalog;
+CREATE TRIGGER trg_universal_catalog_revision
+AFTER INSERT OR UPDATE ON universal_catalog
 FOR EACH ROW
-EXECUTE FUNCTION record_catalog_item_revision();
+EXECUTE FUNCTION record_universal_catalog_revision();
 
-INSERT INTO catalog_item_revisions (item_id, operation, kind, key, payload_format, payload, note)
+INSERT INTO universal_catalog_revisions (item_id, operation, kind, key, payload_format, payload, note)
 SELECT id, 'insert', kind, key, payload_format, payload, note
-FROM catalog_items item
+FROM universal_catalog item
 WHERE NOT EXISTS (
   SELECT 1
-  FROM catalog_item_revisions revision
+  FROM universal_catalog_revisions revision
   WHERE revision.item_id = item.id
 );

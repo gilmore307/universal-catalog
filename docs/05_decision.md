@@ -5,7 +5,7 @@
 - DEC-001: keep shared catalog content in its own repository
 - DEC-002: position the repository as `universal-catalog`
 - DEC-003: use stable random ids for catalog identity
-- DEC-004: keep only the active register in SQL
+- DEC-004: keep only the active `universal_catalog` table in SQL
 - DEC-005: stay off SQLite
 - DEC-006: start from a bounded catalog kind set and expand only when justified
 - DEC-007: keep the initial helper surface read-only and executor-injected
@@ -43,13 +43,13 @@
 - **Reason:** Human-readable keys can change. Stable opaque ids keep downstream code insulated from naming and payload edits.
 - **Revisit condition:** Revisit only if a stronger immutable identity layer is intentionally adopted across all consumers.
 
-### DEC-004 Keep only the active register in SQL
+### DEC-004 Keep only the active `universal_catalog` table in SQL
 
 - **Date:** 2026-04-23
 - **Decision:** Keep a single active catalog table in SQL and rely on Git history for change history.
 - **Reason:** A separate SQL history table adds complexity without enough value for the current repository stage.
 - **Revisit condition:** Revisit only if audit or rollback requirements outgrow Git-backed history.
-- **Later change:** DEC-017 supersedes the Git-only history model by adding append-only migrations, `schema_migrations`, and `catalog_item_revisions` for the long-lived active database.
+- **Later change:** DEC-017 supersedes the Git-only history model by adding append-only migrations, `schema_migrations`, and `universal_catalog_revisions` for the long-lived active database.
 
 ### DEC-005 Stay off SQLite
 
@@ -118,14 +118,14 @@
 ### DEC-014 Register default status vocabularies as dedicated kinds
 
 - **Date:** 2026-04-24
-- **Decision:** Add dedicated kinds for `task_lifecycle_state`, `review_readiness`, `acceptance_outcome`, and `test_status`, and register default shared values for each kind in the active catalog register.
+- **Decision:** Add dedicated kinds for `task_lifecycle_state`, `review_readiness`, `acceptance_outcome`, and `test_status`, and register default shared values for each kind in the active `universal_catalog` table.
 - **Reason:** Shared task and review artifacts become more automatable when their default value vocabularies are explicit instead of being left fully project-defined.
 - **Revisit condition:** Revisit only if a stronger shared status-governance model replaces these defaults.
 
 ### DEC-015 Register maintenance and docs status vocabularies
 
 - **Date:** 2026-04-24
-- **Decision:** Add dedicated kinds for `maintenance_status` and `docs_status`, and register default shared values for each kind in the active catalog register.
+- **Decision:** Add dedicated kinds for `maintenance_status` and `docs_status`, and register default shared values for each kind in the active `universal_catalog` table.
 - **Reason:** Maintenance outputs become more stable and automatable when overall maintenance condition and docs-drift condition use explicit default vocabularies instead of staying fully project-defined.
 - **Revisit condition:** Revisit only if those vocabularies are intentionally superseded by another shared governance layer.
 
@@ -139,6 +139,6 @@
 ### DEC-017 Use a long-lived PostgreSQL active database with migrations
 
 - **Date:** 2026-04-24
-- **Decision:** Treat the local PostgreSQL database named `universal-catalog` as the long-lived active catalog register, and evolve it through append-only migrations under `storage/dictionary/migrations/` applied by `scripts/apply-migrations.py`.
+- **Decision:** Treat the local PostgreSQL database named `openclaw` as the long-lived OpenClaw database, with `universal_catalog` as the catalog table, and evolve it through append-only migrations under `storage/dictionary/migrations/` applied by `scripts/apply-migrations.py`.
 - **Reason:** Future catalog usage may involve much more data, so a seed-file rebuild model would become fragile and drift-prone. A migration ledger lets the database stay active while still keeping changes reviewed and replayable.
 - **Revisit condition:** Revisit only if the repository intentionally moves to a managed migration framework or a runtime service boundary with equivalent ledger and audit guarantees.

@@ -40,19 +40,19 @@ Target runtime triggers:
 
 ### Main Owner
 
-- active PostgreSQL database `universal-catalog`
+- active PostgreSQL database `openclaw`
 - `storage/dictionary/migrations/`
 - `scripts/apply-migrations.py`
 
 ### Main Outputs
 
-- active `catalog_items` rows
+- active `universal_catalog` rows
 - `schema_migrations` ledger rows with migration version, filename, checksum, and applied time
-- `catalog_item_revisions` snapshots for inserted or materially updated catalog items
+- `universal_catalog_revisions` snapshots for inserted or materially updated catalog items
 
 ### Workflow
 
-1. resolve `UNIVERSAL_CATALOG_DATABASE_URL` from the local secret alias when the environment variable is not already set
+1. resolve `OPENCLAW_DATABASE_URL` from the local secret alias when the environment variable is not already set
 2. inspect `schema_migrations` for already-applied migration versions and checksums
 3. stop if an applied migration file has a checksum mismatch
 4. apply each pending migration in filename order
@@ -75,14 +75,14 @@ Target runtime triggers:
 
 ### Main Owner
 
-- active PostgreSQL database `universal-catalog`
+- active PostgreSQL database `openclaw`
 - new append-only migration under `storage/dictionary/migrations/`
 - `storage/templates/` when `kind = output`
 - the relevant docs file when repository boundary or decisions change
 
 ### Main Outputs
 
-- one new active register row with a stable id and key
+- one new active `universal_catalog` table row with a stable id and key
 - one matching output artifact or script address when the kind requires it
 - aligned docs when the repository boundary changed
 
@@ -93,7 +93,7 @@ Target runtime triggers:
 3. assign a stable id with the correct prefix
 4. add an append-only migration under `storage/dictionary/migrations/` that writes the catalog row
 5. update output template files or script addresses when the kind requires it
-6. apply pending migrations to the active PostgreSQL database named `universal-catalog`
+6. apply pending migrations to the active PostgreSQL database named `openclaw`
 7. update docs when the new item changes scope, workflow, acceptance, task state, or project decisions
 
 ---
@@ -112,14 +112,14 @@ Target runtime triggers:
 
 ### Main Owner
 
-- active PostgreSQL database `universal-catalog`
+- active PostgreSQL database `openclaw`
 - new append-only migration under `storage/dictionary/migrations/`
 - `storage/templates/` when an existing `output` file changes
 - neighboring docs only when repository boundary or decisions changed
 
 ### Main Outputs
 
-- one updated active register row for the same stable item
+- one updated active `universal_catalog` table row for the same stable item
 - updated output artifact content when the item points to a catalog-owned output file
 - clear downstream impact notes when the update is non-trivial
 
@@ -128,7 +128,7 @@ Target runtime triggers:
 1. confirm the item identity is unchanged; if the concept changed, create a new id instead
 2. add a new append-only migration that updates the active row; do not rewrite an already-applied migration
 3. update any referenced output template file when the payload points to an output file under `storage/templates/`
-4. apply pending migrations to the active PostgreSQL database named `universal-catalog`
+4. apply pending migrations to the active PostgreSQL database named `openclaw`
 5. update docs only when repository boundary, workflow, task state, or decisions changed
 
 ---
