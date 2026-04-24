@@ -93,6 +93,7 @@ VALUES
   ('rep_N3J7X4MD', 'repo', 'NETWORK_FRAMEWORK_REPO', 'text', 'network-framework', 'canonical repository name for the network-framework project'),
   ('pth_C4X8N2ME', 'path', 'UNIVERSAL_CATALOG_ROOT_PATH', 'text', '/root/projects/universal-catalog', 'repository root path for the universal-catalog checkout'),
   ('pth_R6V1C9TE', 'path', 'NETWORK_FRAMEWORK_ROOT_PATH', 'text', '/root/projects/network-framework', 'repository root path for the network-framework checkout'),
-  ('cfg_J7D1K5RP', 'config', 'DEFAULT_TIMEZONE', 'text', 'America/New_York', 'default shared timezone for this server');
+  ('cfg_J7D1K5RP', 'config', 'DEFAULT_TIMEZONE', 'text', 'America/New_York', 'default shared timezone for this server'),
+  ('cfg_P4R8T2LM', 'config', 'NETWORK_FRAMEWORK_COMPANION_TOKEN_ENV', 'text', 'NETWORK_FRAMEWORK_COMPANION_TOKEN', 'approved config name for the phase-1 network-framework companion bearer token environment variable');
 
 COMMIT;
