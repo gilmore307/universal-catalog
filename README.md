@@ -1,14 +1,14 @@
 # universal-catalog
 
-Shared catalog for server-wide field definitions, output templates, approved terms, and other stable referenced values used by future trading-oriented projects.
+Shared catalog for server-wide field definitions, output templates, approved terms, script-facing locators, and other stable referenced values used by future trading-oriented projects.
 
 This repository is managed by OpenClaw. OpenClaw owns project route, docs, acceptance, and maintenance. Codex may implement bounded tasks when explicitly dispatched.
 
 ## Purpose
 
 - centralize server-wide catalog items that should be reviewed instead of duplicated
-- assign each catalog item a stable random id such as `pth_A7K3P2Q9`
-- let downstream code dereference catalog values so path, field, template, and approved-term changes stay cheap
+- assign each catalog item a stable random id such as `pth_A7K3P2Q9` or `scr_JI36LVNH`
+- let downstream code dereference catalog values so path, script locator, field, template, and approved-term changes stay cheap
 
 ## Project focus
 
@@ -17,6 +17,7 @@ This repository is managed by OpenClaw. OpenClaw owns project route, docs, accep
 - approved term definitions
 - repository identifiers
 - path or locator values that should be referenced through stable ids
+- script-facing full-address locators for automation
 - shared non-sensitive configuration values such as the default timezone
 - lightweight helper code for catalog lookup
 
@@ -30,6 +31,7 @@ Do not store secrets, security-sensitive configuration values, or runtime tradin
 - `path`
 - `config`
 - `term`
+- `script`
 
 ## Repository layout
 
@@ -40,4 +42,4 @@ Do not store secrets, security-sensitive configuration values, or runtime tradin
 
 ## Current state
 
-This repository currently defines the documentation spine, the PostgreSQL register skeleton, an initial read-only Node helper surface under `src/`, and the first approved template files under `storage/templates/`. The seed now includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, fixed-location repository documentation templates, stable path entries for canonical template files used by scripts, the first reusable Codex task prompt template, and the first approved term definitions.
+This repository currently defines the documentation spine, the PostgreSQL register skeleton, an initial read-only Node helper surface under `src/`, and the first approved template files under `storage/templates/`. The seed now includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, fixed-location repository documentation templates, script entries that provide full addresses for canonical template files used by automation, the first reusable Codex task prompt template, and the first approved term definitions.

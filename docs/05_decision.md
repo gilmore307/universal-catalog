@@ -35,7 +35,7 @@
 - **Date:** 2026-04-23
 - **Decision:** Start the active register with five allowed `kind` values: `field`, `template`, `repo`, `path`, and `config`.
 - **Reason:** This covers the initial shared boundary cleanly without prematurely exploding the catalog taxonomy.
-- **Later change:** `DEC-010` later expanded the current kind set by adding `term`.
+- **Later change:** `DEC-010` later expanded the current kind set by adding `term`, and `DEC-012` later expanded it again by adding `script`.
 
 ## DEC-007 Keep the initial helper surface read-only and executor-injected
 
@@ -67,8 +67,8 @@
 - **Decision:** Register `codex_task_prompt.md` as a `kind = template` item with a file payload under `storage/templates/` and keep local skill copies aligned to that canonical content.
 - **Reason:** The Codex task prompt is a reusable file-level artifact across OpenClaw/Codex orchestration flows, so it fits the template boundary better than ad hoc duplicated local copies.
 
-## DEC-012 Register path entries for script-consumed canonical template files
+## DEC-012 Register `script` entries for script-consumed canonical template files
 
 - **Date:** 2026-04-24
-- **Decision:** When canonical template files under `storage/templates/` need stable direct lookup by scripts or automation, register matching `kind = path` items for those repo-relative file locations.
-- **Reason:** `template` items identify the reusable artifact, while matching `path` items give scripts a stable locator without hardcoding raw file paths throughout the toolchain.
+- **Decision:** When canonical template files under `storage/templates/` need stable direct lookup by scripts or automation, register matching `kind = script` items that store the full file address.
+- **Reason:** `template` items identify the reusable artifact, while matching `script` items give automation a stable complete locator without overloading generic `path` entries.

@@ -2,7 +2,7 @@
 
 ## Why this exists
 
-Future trading-oriented services on this server will need a small shared authority for reusable field definitions, output templates, approved term definitions, repository names, shared paths, and low-volatility non-sensitive configuration values. Centralizing those entries keeps change reviewable and avoids uncontrolled duplication.
+Future trading-oriented services on this server will need a small shared authority for reusable field definitions, output templates, approved term definitions, repository names, shared paths, script-facing full-address locators, and low-volatility non-sensitive configuration values. Centralizing those entries keeps change reviewable and avoids uncontrolled duplication.
 
 ## System role
 
@@ -10,7 +10,7 @@ This repository is a shared catalog dependency, not an application. It stores th
 
 ## Core assumptions
 
-- each catalog item gets a stable random id such as `fld_R7P1C6LW`, `tpl_M4N8X2KD`, `rep_H6S3V8LA`, `pth_A7K3P2Q9`, `cfg_J7D1K5RP`, or `trm_NBPU5J5P`
+- each catalog item gets a stable random id such as `fld_R7P1C6LW`, `tpl_M4N8X2KD`, `rep_H6S3V8LA`, `pth_A7K3P2Q9`, `cfg_J7D1K5RP`, `trm_NBPU5J5P`, or `scr_JI36LVNH`
 - the current active register keeps `id` and `key` unique
 - Git history is sufficient for historical change tracking; no separate SQL history table is required
 - templates live as files under `storage/templates/`
@@ -19,6 +19,6 @@ This repository is a shared catalog dependency, not an application. It stores th
 
 ## Related systems
 
-- future trading-oriented services that consume registered fields, templates, term definitions, repositories, paths, and shared config values
+- future trading-oriented services and automation that consume registered fields, templates, term definitions, repositories, paths, script locators, and shared config values
 - repository-local docs that govern naming, workflow, and acceptance
 - SQL tooling used to read and validate the active register

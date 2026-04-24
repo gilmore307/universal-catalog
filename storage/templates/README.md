@@ -18,4 +18,4 @@ Template files referenced by active catalog entries live here.
 
 When a catalog item uses `kind = template` and `payload_format = file`, its `payload` should point to a file stored under this directory unless a later decision expands the boundary.
 
-When scripts need a stable direct locator for one of these files, register a matching `kind = path` entry that points to the same repo-relative file path instead of hardcoding the raw path in multiple places.
+When scripts need a stable direct locator for one of these files, register a matching `kind = script` entry that stores the full file address instead of hardcoding the raw path in multiple places.

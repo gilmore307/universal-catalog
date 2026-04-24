@@ -11,6 +11,7 @@ Define the shared catalog layer for server-wide values that future trading-orien
 - server-wide approved term definitions and glossary entries
 - repository identifiers that should be shared consistently across services
 - path or locator values that should be addressed through stable catalog ids
+- script-facing full-address locators for automation that reuses canonical files
 - shared non-sensitive configuration defaults such as timezone
 - SQL storage for the active catalog register
 - repository docs and a small read-only helper surface for catalog lookup

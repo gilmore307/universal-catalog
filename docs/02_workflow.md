@@ -4,11 +4,11 @@
 
 1. Confirm the item belongs to the shared server-wide catalog boundary.
 2. Check that no existing active item already covers the same concept.
-3. Assign a stable random id with the correct prefix (`fld_`, `tpl_`, `rep_`, `pth_`, `cfg_`, or `trm_`).
+3. Assign a stable random id with the correct prefix (`fld_`, `tpl_`, `rep_`, `pth_`, `cfg_`, `trm_`, or `scr_`).
 4. Add or update the supporting artifact:
    - SQL row in `storage/dictionary/seed.sql`
    - template file in `storage/templates/` when `kind = template`
-   - matching path row when scripts need a stable direct locator for that template file
+   - matching script row when automation needs the full direct address for that template file
    - text definition in the active row when `kind = term`
 5. Update docs when the new item changes scope, workflow, acceptance, or project decisions.
 

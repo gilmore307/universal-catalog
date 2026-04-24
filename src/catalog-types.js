@@ -7,6 +7,7 @@ const CATALOG_KINDS = Object.freeze([
   'path',
   'config',
   'term',
+  'script',
 ]);
 
 function isCatalogKind(value) {

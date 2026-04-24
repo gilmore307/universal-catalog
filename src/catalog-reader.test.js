@@ -26,9 +26,10 @@ function createRow(overrides) {
 }
 
 test('catalog kinds stay fixed to the documented set', () => {
-  assert.deepEqual(CATALOG_KINDS, ['field', 'template', 'repo', 'path', 'config', 'term']);
+  assert.deepEqual(CATALOG_KINDS, ['field', 'template', 'repo', 'path', 'config', 'term', 'script']);
   assert.equal(isCatalogKind('repo'), true);
   assert.equal(isCatalogKind('term'), true);
+  assert.equal(isCatalogKind('script'), true);
   assert.equal(isCatalogKind('unknown'), false);
   assert.equal(assertCatalogKind('config'), 'config');
   assert.throws(() => assertCatalogKind('unknown'), /Invalid catalog kind: unknown/);
