@@ -78,3 +78,9 @@
 - **Date:** 2026-04-24
 - **Decision:** Use `storage/templates/` only for catalog-owned output templates and register those files under `kind = output` when they are real.
 - **Reason:** This keeps output artifacts separate from skill-local markdown templates and preserves a cleaner catalog boundary.
+
+## DEC-014 Register default status vocabularies as dedicated kinds
+
+- **Date:** 2026-04-24
+- **Decision:** Add dedicated kinds for `task_lifecycle_state`, `review_readiness`, `acceptance_outcome`, and `test_status`, and register default shared values for each kind in the active seed.
+- **Reason:** Shared task and review artifacts become more automatable when their default value vocabularies are explicit instead of being left fully project-defined.

@@ -8,6 +8,10 @@ const CATALOG_KINDS = Object.freeze([
   'config',
   'term',
   'script',
+  'task_lifecycle_state',
+  'review_readiness',
+  'acceptance_outcome',
+  'test_status',
 ]);
 
 function isCatalogKind(value) {

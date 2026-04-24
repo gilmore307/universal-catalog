@@ -10,7 +10,7 @@ Read-only helper surface for `universal-catalog`.
 
 ## Current files
 
-- `catalog-types.js` — current allowed catalog kinds and kind validation helpers, including `output`, `term`, and `script`
+- `catalog-types.js` — current allowed catalog kinds and kind validation helpers, including `output`, `term`, `script`, and the default status-vocabulary kinds
 - `catalog-reader.js` — row mapping plus read-only lookup helpers built around an injected query executor
 - `index.js` — stable entrypoint exports for downstream consumers
 - `catalog-reader.test.js` — Node tests for the helper surface

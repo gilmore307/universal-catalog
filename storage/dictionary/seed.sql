@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
--- Bootstrap fields for the catalog register itself and the first ratified shared workflow slots.
+-- Bootstrap fields for the catalog register itself, the first ratified shared workflow slots, and the default shared status vocabularies.
 INSERT INTO catalog_items (id, kind, key, payload_format, payload, note)
 VALUES
   ('fld_A7K3P2Q9', 'field', 'CATALOG_ITEM_ID', 'text', 'id', 'canonical column name for catalog_items.id'),
@@ -52,6 +52,28 @@ VALUES
   ('fld_4BVOLV5F', 'field', 'MEMORY_ROUTE_ISSUE_LIST', 'text', 'memory_route_issue_list', 'canonical shared field name for memory route issue list slots'),
   ('fld_4ZRFN5AJ', 'field', 'FOLLOW_UP_TASK_LIST', 'text', 'follow_up_task_list', 'canonical shared field name for follow-up task list slots'),
   ('fld_37IEP8QF', 'field', 'MAINTENANCE_SUMMARY', 'text', 'maintenance_summary', 'canonical shared field name for maintenance summary slots'),
+  ('tls_D4N8K2QW', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_DESIGNING', 'text', 'designing', 'default shared task lifecycle state value for work that is still being designed'),
+  ('tls_P7M3V9LC', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_READY_TO_DISPATCH', 'text', 'ready_to_dispatch', 'default shared task lifecycle state value for work ready to hand to an executor'),
+  ('tls_B6X2H5RA', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_DISPATCHED', 'text', 'dispatched', 'default shared task lifecycle state value for work that has been dispatched'),
+  ('tls_T8J4W1NP', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_EXECUTING', 'text', 'executing', 'default shared task lifecycle state value for work in active execution'),
+  ('tls_K5Q7F2MD', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_BLOCKED', 'text', 'blocked', 'default shared task lifecycle state value for work that is blocked'),
+  ('tls_R3C9Y6UA', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_READY_FOR_ACCEPTANCE', 'text', 'ready_for_acceptance', 'default shared task lifecycle state value for work waiting for acceptance review'),
+  ('tls_H1V8L4TE', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_ACCEPTED', 'text', 'accepted', 'default shared task lifecycle state value for work that has been accepted'),
+  ('tls_N7B2P5XK', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_REJECTED', 'text', 'rejected', 'default shared task lifecycle state value for work that has been rejected'),
+  ('tls_M4D6R8QJ', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_CLOSED', 'text', 'closed', 'default shared task lifecycle state value for work that is closed'),
+  ('tls_C9T1G7WF', 'task_lifecycle_state', 'TASK_LIFECYCLE_STATE_CANCELLED', 'text', 'cancelled', 'default shared task lifecycle state value for work that has been cancelled'),
+  ('rrd_L2F8Q4MA', 'review_readiness', 'REVIEW_READINESS_READY', 'text', 'ready', 'default shared review readiness value for work that is ready for review'),
+  ('rrd_W6P3N1TX', 'review_readiness', 'REVIEW_READINESS_NOT_READY', 'text', 'not_ready', 'default shared review readiness value for work that is not ready for review'),
+  ('rrd_V9H5C2KR', 'review_readiness', 'REVIEW_READINESS_BLOCKED', 'text', 'blocked', 'default shared review readiness value for work that is blocked from review'),
+  ('aco_Q1M7D4LP', 'acceptance_outcome', 'ACCEPTANCE_OUTCOME_ACCEPTED', 'text', 'accepted', 'default shared acceptance outcome value for accepted work'),
+  ('aco_B8T3W6FN', 'acceptance_outcome', 'ACCEPTANCE_OUTCOME_REJECTED', 'text', 'rejected', 'default shared acceptance outcome value for rejected work'),
+  ('aco_N5K2R9VC', 'acceptance_outcome', 'ACCEPTANCE_OUTCOME_RETURNED', 'text', 'returned', 'default shared acceptance outcome value for work returned for more changes'),
+  ('aco_H7Y4P1ZD', 'acceptance_outcome', 'ACCEPTANCE_OUTCOME_BLOCKED', 'text', 'blocked', 'default shared acceptance outcome value for work blocked from a final decision'),
+  ('tst_J3Q8L2NW', 'test_status', 'TEST_STATUS_PASSED', 'text', 'passed', 'default shared test status value for passing verification'),
+  ('tst_F6V1M5RA', 'test_status', 'TEST_STATUS_FAILED', 'text', 'failed', 'default shared test status value for failing verification'),
+  ('tst_P9C4T7XH', 'test_status', 'TEST_STATUS_NOT_RUN', 'text', 'not_run', 'default shared test status value when verification did not run'),
+  ('tst_R2D6K8YL', 'test_status', 'TEST_STATUS_PARTIALLY_RUN', 'text', 'partially_run', 'default shared test status value when verification ran only partially'),
+  ('tst_X5N1B4QJ', 'test_status', 'TEST_STATUS_NOT_REQUIRED', 'text', 'not_required', 'default shared test status value when verification was not required'),
   ('scr_YO00DVVP', 'script', 'CATALOG_READER_SCRIPT_ADDRESS', 'text', '/root/projects/universal-catalog/src/catalog-reader.js', 'canonical full script address for the catalog reader helper source file'),
   ('scr_MA60CYT4', 'script', 'CATALOG_TYPES_SCRIPT_ADDRESS', 'text', '/root/projects/universal-catalog/src/catalog-types.js', 'canonical full script address for the catalog types helper source file'),
   ('scr_7XQAMNBH', 'script', 'CATALOG_INDEX_SCRIPT_ADDRESS', 'text', '/root/projects/universal-catalog/src/index.js', 'canonical full script address for the catalog entrypoint source file'),

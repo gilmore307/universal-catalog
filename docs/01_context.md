@@ -2,7 +2,7 @@
 
 ## Why this exists
 
-Future trading-oriented services on this server will need a small shared authority for reusable field definitions, output templates, approved term definitions, repository names, shared paths, concrete source-file locators for automation, and low-volatility non-sensitive configuration values. Centralizing those entries keeps change reviewable and avoids uncontrolled duplication.
+Future trading-oriented services on this server will need a small shared authority for reusable field definitions, output templates, approved term definitions, repository names, shared paths, concrete source-file locators for automation, default status vocabularies, and low-volatility non-sensitive configuration values. Centralizing those entries keeps change reviewable and avoids uncontrolled duplication.
 
 ## System role
 
@@ -14,12 +14,13 @@ This repository is a shared catalog dependency, not an application. It stores th
 - the current active register keeps `id` and `key` unique
 - Git history is sufficient for historical change tracking; no separate SQL history table is required
 - output templates live as files under `storage/templates/` when this repository truly owns them
+- default status vocabularies may be registered as dedicated kinds when they become stable shared values
 - skill-local markdown templates remain in the relevant skill bundles instead of being duplicated here
 - the register schema should stay PostgreSQL-oriented rather than SQLite-oriented
 - `src/` now provides a small read-only helper surface built around an injected query executor rather than owning database connections itself
 
 ## Related systems
 
-- future trading-oriented services and automation that consume registered fields, outputs, term definitions, repositories, paths, script locators, and shared config values
+- future trading-oriented services and automation that consume registered fields, outputs, term definitions, repositories, paths, script locators, shared status vocabularies, and shared config values
 - repository-local docs and skills that govern naming, workflow, and acceptance
 - SQL tooling used to read and validate the active register
