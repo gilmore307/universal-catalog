@@ -7,12 +7,10 @@ Codex may implement bounded tasks when explicitly dispatched.
 
 ## Project focus
 
-This repository defines shared naming authority:
-- formal words
-- field names
-- status values
-- schema keys
-- file-name tokens
-- forbidden synonyms
+This repository defines the shared catalog layer for future trading-oriented services:
+- field registrations
+- output templates
+- path or locator values that should be referenced through stable ids
+- lightweight helper code for catalog lookup when implementation begins
 
-Do not treat undocumented names as approved names.
+Do not store secrets, security configuration, or runtime trading data here.

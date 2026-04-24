@@ -1,0 +1,12 @@
+# storage/dictionary
+
+SQL source of truth for the active catalog register.
+
+## Files
+
+- `schema.sql` — defines the active `catalog_items` table
+- `seed.sql` — loads approved active rows into the register
+
+## Notes
+
+This directory keeps only the active register. Change history lives in Git rather than a separate SQL history table.
