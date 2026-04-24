@@ -47,3 +47,9 @@
 - **Date:** 2026-04-24
 - **Decision:** When a reusable cross-project workflow template is ratified, register its canonical shared field names in `universal-catalog` under `kind = field`.
 - **Reason:** This keeps skill-template slot names and catalog governance aligned without pretending undecided wrappers, enums, or full schemas are already standardized.
+
+## DEC-009 Register fixed-location repository documentation templates as template items
+
+- **Date:** 2026-04-24
+- **Decision:** Register the canonical root `README.md` template and the fixed-location docs spine templates (`docs/00_scope.md` through `docs/06_memory.md`) as `kind = template` items with file payloads under `storage/templates/`.
+- **Reason:** These are stable reusable file-level artifacts. Registering the files themselves is cleaner than treating every internal heading as a catalog field.

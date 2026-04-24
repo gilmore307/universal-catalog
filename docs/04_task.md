@@ -3,7 +3,7 @@
 ## Queued
 
 - Continue extending the seed set as additional shared templates and cross-project fields are ratified.
-- Add the first approved template files and related template catalog items.
+- Decide whether to register additional fixed-location shared templates beyond the current root README and docs spine files.
 - Add a repeatable PostgreSQL-backed verification path in local tooling or CI.
 - Add the first real consumer integration example for the `src/` helper surface.
 
@@ -14,6 +14,7 @@
 - Registered the first ratified shared workflow slot fields for completion-receipt templates in `storage/dictionary/seed.sql`.
 - Registered the first ratified shared workflow slot fields for acceptance-receipt templates in `storage/dictionary/seed.sql`.
 - Registered the first ratified shared workflow slot fields for maintenance-output templates in `storage/dictionary/seed.sql`.
+- Added the first approved template files under `storage/templates/` and registered the fixed-location root README and docs spine templates in `storage/dictionary/seed.sql`.
 
 ## Notes
 
