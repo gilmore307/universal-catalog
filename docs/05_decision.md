@@ -60,3 +60,9 @@
 - **Date:** 2026-04-24
 - **Decision:** Add `term` as an allowed `kind` so `universal-catalog` can register approved specialized terms and self-defined project terms with text definitions.
 - **Reason:** Terms and meanings are stable shared reference material, and they should not be forced awkwardly into `field` or `config` entries.
+
+## DEC-011 Register the reusable Codex task prompt as a canonical template item
+
+- **Date:** 2026-04-24
+- **Decision:** Register `codex_task_prompt.md` as a `kind = template` item with a file payload under `storage/templates/` and keep local skill copies aligned to that canonical content.
+- **Reason:** The Codex task prompt is a reusable file-level artifact across OpenClaw/Codex orchestration flows, so it fits the template boundary better than ad hoc duplicated local copies.

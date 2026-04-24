@@ -12,6 +12,7 @@ Template files referenced by active catalog entries live here.
 - `docs_04_task.md` — canonical template for `docs/04_task.md`
 - `docs_05_decision.md` — canonical template for `docs/05_decision.md`
 - `docs_06_memory.md` — canonical template for `docs/06_memory.md` when that optional file is used
+- `codex_task_prompt.md` — canonical reusable Codex task prompt template for OpenClaw-managed implementation dispatch
 
 ## Rule
 
