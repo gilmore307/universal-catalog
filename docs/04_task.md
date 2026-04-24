@@ -13,6 +13,7 @@
 - Registered the first ratified shared workflow slot fields for execution-key templates in `storage/dictionary/seed.sql`.
 - Registered the first ratified shared workflow slot fields for completion-receipt templates in `storage/dictionary/seed.sql`.
 - Registered the first ratified shared workflow slot fields for acceptance-receipt templates in `storage/dictionary/seed.sql`.
+- Registered the first ratified shared workflow slot fields for maintenance-output templates in `storage/dictionary/seed.sql`.
 
 ## Notes
 
