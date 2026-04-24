@@ -40,4 +40,4 @@ Do not store secrets, security-sensitive configuration values, or runtime tradin
 
 ## Current state
 
-This repository currently defines the documentation spine, the PostgreSQL register skeleton, an initial read-only Node helper surface under `src/`, and the first approved template files under `storage/templates/`. The seed now includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, fixed-location repository documentation templates, the first reusable Codex task prompt template, and the first approved term definitions.
+This repository currently defines the documentation spine, the PostgreSQL register skeleton, an initial read-only Node helper surface under `src/`, and the first approved template files under `storage/templates/`. The seed now includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, fixed-location repository documentation templates, stable path entries for canonical template files used by scripts, the first reusable Codex task prompt template, and the first approved term definitions.

@@ -8,6 +8,7 @@
 4. Add or update the supporting artifact:
    - SQL row in `storage/dictionary/seed.sql`
    - template file in `storage/templates/` when `kind = template`
+   - matching path row when scripts need a stable direct locator for that template file
    - text definition in the active row when `kind = term`
 5. Update docs when the new item changes scope, workflow, acceptance, or project decisions.
 

@@ -17,6 +17,7 @@
 - Registered the first ratified shared workflow slot fields for maintenance-output templates in `storage/dictionary/seed.sql`.
 - Added the first approved template files under `storage/templates/` and registered the fixed-location root README and docs spine templates in `storage/dictionary/seed.sql`.
 - Added the canonical reusable `codex_task_prompt.md` template under `storage/templates/` and registered it in `storage/dictionary/seed.sql`.
+- Registered stable path entries for the canonical template files under `storage/templates/` so scripts can resolve them without hardcoding raw paths.
 - Added a dedicated `term` kind and registered the first approved term definitions in `storage/dictionary/seed.sql`.
 
 ## Notes

@@ -66,3 +66,9 @@
 - **Date:** 2026-04-24
 - **Decision:** Register `codex_task_prompt.md` as a `kind = template` item with a file payload under `storage/templates/` and keep local skill copies aligned to that canonical content.
 - **Reason:** The Codex task prompt is a reusable file-level artifact across OpenClaw/Codex orchestration flows, so it fits the template boundary better than ad hoc duplicated local copies.
+
+## DEC-012 Register path entries for script-consumed canonical template files
+
+- **Date:** 2026-04-24
+- **Decision:** When canonical template files under `storage/templates/` need stable direct lookup by scripts or automation, register matching `kind = path` items for those repo-relative file locations.
+- **Reason:** `template` items identify the reusable artifact, while matching `path` items give scripts a stable locator without hardcoding raw file paths throughout the toolchain.
