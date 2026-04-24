@@ -12,15 +12,16 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 
 ## Environment
 
-- PostgreSQL-oriented catalog register under `storage/dictionary/`
+- long-lived PostgreSQL catalog database named `universal-catalog`
+- append-only migrations under `storage/dictionary/migrations/`
 - optional catalog-owned output templates under `storage/templates/`
 - a small read-only Node helper surface under `src/`
-- Git history as the durable change log for catalog evolution
+- Git history plus the `schema_migrations` database ledger as the durable change log for catalog evolution
 
 ## Dependencies
 
 - a local PostgreSQL database named `universal-catalog` for the active catalog register
-- `psql` for the acceptance path that applies `schema.sql` and `seed.sql`
+- `psql` for the acceptance path that applies pending migrations
 - a local secret alias for the active catalog database URL, registered as `UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS` with payload `universal-catalog/database-url`
 - Node.js for the read-only helper tests under `src/`
 
@@ -34,6 +35,8 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 
 - each catalog item gets a stable id with the correct prefix such as `fld_`, `out_`, `rep_`, `pth_`, `cfg_`, `trm_`, or `scr_`
 - the active register keeps `id` and `key` unique
+- applied migrations are recorded in `schema_migrations` with filename and SHA-256 checksum
+- historical row snapshots are recorded in `catalog_item_revisions` when active rows are inserted or materially updated
 - the register schema stays PostgreSQL-oriented rather than SQLite-oriented
 - skill-local markdown templates remain in their relevant skill bundles instead of being duplicated here
 - `src/` must stay read-only and executor-injected instead of owning database connections or write paths

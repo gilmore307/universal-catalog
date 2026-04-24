@@ -5,7 +5,7 @@
 Current accepted repository slice:
 
 - fixed docs spine for project boundary and decisions
-- PostgreSQL schema and seed data used to rebuild the active catalog register
+- PostgreSQL migrations and migration runner for the long-lived active catalog register
 - catalog-owned output-template storage boundary under `storage/templates/`
 - a small read-only helper surface under `src/`
 
@@ -45,9 +45,9 @@ Run these commands against the local active PostgreSQL catalog database named `u
 The local host resolves `UNIVERSAL_CATALOG_DATABASE_URL` from the secret alias registered by `UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS` (`universal-catalog/database-url`).
 
 ```bash
-psql "$UNIVERSAL_CATALOG_DATABASE_URL" -v ON_ERROR_STOP=1 -c 'DROP TABLE IF EXISTS catalog_items;'
-psql "$UNIVERSAL_CATALOG_DATABASE_URL" -v ON_ERROR_STOP=1 -f storage/dictionary/schema.sql
-psql "$UNIVERSAL_CATALOG_DATABASE_URL" -v ON_ERROR_STOP=1 -f storage/dictionary/seed.sql
+python3 scripts/apply-migrations.py
+psql "$UNIVERSAL_CATALOG_DATABASE_URL" -Atc "SELECT COUNT(*), COUNT(DISTINCT key), COUNT(DISTINCT id) FROM catalog_items;"
+psql "$UNIVERSAL_CATALOG_DATABASE_URL" -Atc "SELECT version, checksum_sha256 FROM schema_migrations ORDER BY version;"
 ```
 
 When `src/` changes, also run:
@@ -56,13 +56,13 @@ When `src/` changes, also run:
 node --test src/catalog-reader.test.js
 ```
 
-Do not maintain a second long-lived acceptance database. The local active database is rebuilt from the versioned schema and seed during catalog maintenance so the SQL files and active register cannot drift silently. SQLite is not an acceptance target for this repository.
+Do not maintain a second long-lived acceptance database. The local active database evolves through append-only migrations recorded in `schema_migrations`; do not hand-edit long-lived catalog rows outside reviewed migrations. SQLite is not an acceptance target for this repository.
 
 ## Required Review Evidence
 
 - diff review for storage, docs, and helper-boundary changes
-- successful schema application output
-- successful seed application output
+- successful migration application output
+- migration ledger output from `schema_migrations`
 - note that `UNIVERSAL_CATALOG_DATABASE_URL` came from the local active catalog database alias
 - `src/catalog-reader.test.js` output when `src/` changed
 - explicit note that a new or updated item is truly shared rather than project-local
@@ -74,7 +74,7 @@ Reject a change when:
 
 - a supposedly shared item is actually project-local
 - an update silently changes the meaning of an existing stable id
-- the active register breaks schema or seed application
+- the active register breaks migration application or ledger checksum validation
 - a maintained directory loses its boundary README
 - docs and storage drift out of sync about what this repository owns
 - helper code quietly expands into write-side behavior or hides catalog access behind opaque runtime state

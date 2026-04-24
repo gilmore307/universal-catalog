@@ -1,4 +1,5 @@
-BEGIN TRANSACTION;
+-- Bootstrap the active universal-catalog register with the currently approved items.
+-- Target engine: PostgreSQL.
 
 -- Bootstrap fields for the catalog register itself, the first ratified shared workflow slots, and the default shared status vocabularies.
 INSERT INTO catalog_items (id, kind, key, payload_format, payload, note)
@@ -107,6 +108,10 @@ VALUES
   ('cfg_N9K3V5QA', 'config', 'NETWORK_FRAMEWORK_SMB_REMOTE_PATH_KEY', 'text', 'smbRemotePath', 'approved local config key for the network-framework SMB UNC path'),
   ('cfg_B4L8T2XC', 'config', 'NETWORK_FRAMEWORK_DASHBOARD_URL_KEY', 'text', 'dashboardUrl', 'approved local config key for the network-framework dashboard URL'),
   ('cfg_X6M1R9PW', 'config', 'NETWORK_FRAMEWORK_COMPANION_STATUS_URL_KEY', 'text', 'companionStatusUrl', 'approved local config key for the network-framework read-only companion status URL'),
-  ('cfg_U8C2D6YA', 'config', 'UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS', 'text', 'universal-catalog/database-url', 'approved config key for the active universal-catalog PostgreSQL database URL secret alias; the catalog stores the alias reference, not connection secret material');
-
-COMMIT;
+  ('cfg_U8C2D6YA', 'config', 'UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS', 'text', 'universal-catalog/database-url', 'approved config key for the active universal-catalog PostgreSQL database URL secret alias; the catalog stores the alias reference, not connection secret material')
+ON CONFLICT (id) DO UPDATE SET
+  kind = EXCLUDED.kind,
+  key = EXCLUDED.key,
+  payload_format = EXCLUDED.payload_format,
+  payload = EXCLUDED.payload,
+  note = EXCLUDED.note;

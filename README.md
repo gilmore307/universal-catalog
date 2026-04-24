@@ -22,6 +22,7 @@ This repository is managed by OpenClaw. OpenClaw owns project route, docs, accep
 - shared non-sensitive configuration values such as the default timezone
 - shared secret-alias config references that point to local secrets-registry entries without storing secret values in the catalog
 - lightweight helper code for catalog lookup
+- PostgreSQL migrations for the long-lived active catalog database
 
 Do not store secrets, security-sensitive configuration values, runtime application data, or skill-local markdown templates here.
 
@@ -44,14 +45,14 @@ Do not store secrets, security-sensitive configuration values, runtime applicati
 ## Repository layout
 
 - `docs/` — formal project docs spine
-- `storage/dictionary/` — SQL schema and seed data for active catalog items
+- `storage/dictionary/` — PostgreSQL migrations for active catalog items
 - `storage/templates/` — output template files referenced by catalog entries
 - `src/` — read-only helper surface for catalog lookup
 
 ## Current state
 
-This repository currently defines the documentation spine, the PostgreSQL register skeleton, an initial read-only Node helper surface under `src/`, and the storage boundary for future output templates under `storage/templates/`.
+This repository currently defines the documentation spine, the PostgreSQL active register migration path, an initial read-only Node helper surface under `src/`, and the storage boundary for future output templates under `storage/templates/`.
 
-The active seed currently includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, default status vocabulary values for task, review, and maintenance artifacts, script entries that provide full addresses for the current helper source files under `src/`, the first approved term definitions, and the first config entry that points to a local secrets-registry alias instead of storing a secret value.
+The initial bootstrap migration currently includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, default status vocabulary values for task, review, and maintenance artifacts, script entries that provide full addresses for the current helper source files under `src/`, the first approved term definitions, and the first config entry that points to a local secrets-registry alias instead of storing a secret value.
 
 Markdown documentation templates and Codex prompt templates now stay in their relevant skills instead of being registered here.

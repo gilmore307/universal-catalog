@@ -6,19 +6,58 @@ Define how shared catalog items are registered, updated, and consumed without bl
 
 ## Workflow Set
 
-`universal-catalog` currently operates through three repository workflows:
+`universal-catalog` currently operates through four repository workflows:
 
-1. register a new catalog item
-2. update an existing catalog item
-3. consume catalog values in code
+1. apply pending database migrations
+2. register a new catalog item
+3. update an existing catalog item
+4. consume catalog values in code
 
 ## Operating Principles
 
 - confirm shared server-wide scope before adding a new catalog item
 - keep stable ids stable once introduced
+- keep migrations append-only after they are applied
+- do not hand-edit long-lived database rows outside a reviewed migration
 - keep the active row, referenced artifact, and docs aligned in the same change
 - update only the canonical doc home when boundary or decision changes
 - keep `src/` read-only and executor-injected
+
+---
+
+## WF-000 Apply pending database migrations
+
+### Trigger Conditions
+
+Current triggers:
+
+- repository storage migration files changed
+- active PostgreSQL database needs to catch up with committed catalog changes
+
+Target runtime triggers:
+
+- catalog maintenance or deployment needs to apply pending schema/data changes without rebuilding a second database
+
+### Main Owner
+
+- active PostgreSQL database `universal-catalog`
+- `storage/dictionary/migrations/`
+- `scripts/apply-migrations.py`
+
+### Main Outputs
+
+- active `catalog_items` rows
+- `schema_migrations` ledger rows with migration version, filename, checksum, and applied time
+- `catalog_item_revisions` snapshots for inserted or materially updated catalog items
+
+### Workflow
+
+1. resolve `UNIVERSAL_CATALOG_DATABASE_URL` from the local secret alias when the environment variable is not already set
+2. inspect `schema_migrations` for already-applied migration versions and checksums
+3. stop if an applied migration file has a checksum mismatch
+4. apply each pending migration in filename order
+5. record the migration in `schema_migrations` after successful application
+6. verify active row count and uniqueness checks
 
 ---
 
@@ -37,7 +76,7 @@ Target runtime triggers:
 ### Main Owner
 
 - active PostgreSQL database `universal-catalog`
-- `storage/dictionary/seed.sql` as the versioned rebuild input
+- new append-only migration under `storage/dictionary/migrations/`
 - `storage/templates/` when `kind = output`
 - the relevant docs file when repository boundary or decisions change
 
@@ -52,13 +91,10 @@ Target runtime triggers:
 1. confirm the item belongs to the shared server-wide catalog boundary
 2. check that no existing active item already covers the same concept
 3. assign a stable id with the correct prefix
-4. add or update the versioned rebuild input:
-   - SQL row in `storage/dictionary/seed.sql`
-   - output template file in `storage/templates/` when `kind = output`
-   - full source-file address in the active row when `kind = script`
-   - text definition in the active row when `kind = term`
-5. apply the schema/seed maintenance path to the active PostgreSQL database named `universal-catalog`
-6. update docs when the new item changes scope, workflow, acceptance, task state, or project decisions
+4. add an append-only migration under `storage/dictionary/migrations/` that writes the catalog row
+5. update output template files or script addresses when the kind requires it
+6. apply pending migrations to the active PostgreSQL database named `universal-catalog`
+7. update docs when the new item changes scope, workflow, acceptance, task state, or project decisions
 
 ---
 
@@ -77,7 +113,7 @@ Target runtime triggers:
 ### Main Owner
 
 - active PostgreSQL database `universal-catalog`
-- `storage/dictionary/seed.sql` as the versioned rebuild input
+- new append-only migration under `storage/dictionary/migrations/`
 - `storage/templates/` when an existing `output` file changes
 - neighboring docs only when repository boundary or decisions changed
 
@@ -90,9 +126,9 @@ Target runtime triggers:
 ### Workflow
 
 1. confirm the item identity is unchanged; if the concept changed, create a new id instead
-2. update the versioned row in `storage/dictionary/seed.sql`
+2. add a new append-only migration that updates the active row; do not rewrite an already-applied migration
 3. update any referenced output template file when the payload points to an output file under `storage/templates/`
-4. apply the schema/seed maintenance path to the active PostgreSQL database named `universal-catalog`
+4. apply pending migrations to the active PostgreSQL database named `universal-catalog`
 5. update docs only when repository boundary, workflow, task state, or decisions changed
 
 ---
@@ -134,7 +170,7 @@ Target runtime triggers:
 
 Across the repository:
 
-1. registration and updates change the versioned rebuild input and the active PostgreSQL register in the same maintenance pass
+1. registration and updates add append-only migrations and apply them to the active PostgreSQL register in the same maintenance pass
 2. output files or script addresses stay aligned with the active row in the same change
 3. docs move only when repository boundary, task state, workflow, acceptance, or decisions truly changed
 4. consumer code treats this repository as a read-only shared authority rather than a runtime service
