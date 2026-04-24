@@ -19,6 +19,7 @@
 - DEC-015: register maintenance and docs status vocabularies
 - DEC-016: use `config` entries for secret-alias references, not secret values
 - DEC-017: use a long-lived PostgreSQL active database with append-only migrations and a migration ledger
+- DEC-018: prioritize disk headroom and active data integrity over exhaustive row-level audit history
 
 ## Decisions
 
@@ -49,7 +50,7 @@
 - **Decision:** Keep a single active catalog table in SQL and rely on Git history for change history.
 - **Reason:** A separate SQL history table adds complexity without enough value for the current repository stage.
 - **Revisit condition:** Revisit only if audit or rollback requirements outgrow Git-backed history.
-- **Later change:** DEC-017 supersedes the Git-only history model by adding append-only migrations, `schema_migrations`, and `universal_catalog_revisions` for the long-lived active database.
+- **Later change:** DEC-017 supersedes the Git-only history model by adding append-only migrations and `schema_migrations`; DEC-018 later removes default full-row revision snapshots to preserve disk headroom.
 
 ### DEC-005 Stay off SQLite
 
@@ -142,3 +143,11 @@
 - **Decision:** Treat the local PostgreSQL database named `openclaw` as the long-lived OpenClaw database, with `universal_catalog` as the catalog table, and evolve it through append-only migrations under `storage/dictionary/schema_migrations/` applied by `scripts/apply-migrations.py`.
 - **Reason:** Future catalog usage may involve much more data, so a seed-file rebuild model would become fragile and drift-prone. A migration ledger lets the database stay active while still keeping changes reviewed and replayable.
 - **Revisit condition:** Revisit only if the repository intentionally moves to a managed migration framework or a runtime service boundary with equivalent ledger and audit guarantees.
+
+
+### DEC-018 Prioritize storage efficiency over exhaustive row audit
+
+- **Date:** 2026-04-24
+- **Decision:** Do not retain full-row revision snapshots by default for catalog or future high-volume tables. Keep the lightweight migration ledger and Git-reviewed migrations, but avoid storage-amplifying audit tables unless a later task explicitly justifies their disk cost and retention policy.
+- **Reason:** Future OpenClaw-managed data volume may be large while local disk is finite. Active data integrity and recoverability are more important than preserving every historical row version.
+- **Revisit condition:** Revisit only for narrowly scoped tables where audit value clearly outweighs storage cost and a retention budget is documented.

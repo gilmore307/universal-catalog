@@ -16,7 +16,7 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 - append-only migrations under `storage/dictionary/schema_migrations/`
 - optional catalog-owned output templates under `storage/templates/`
 - a small read-only Node helper surface under `src/`
-- Git history plus the `schema_migrations` database ledger as the durable change log for catalog evolution
+- Git history plus the lightweight `schema_migrations` database ledger as the durable change log for catalog evolution
 
 ## Dependencies
 
@@ -36,7 +36,7 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 - each catalog item gets a stable id with the correct prefix such as `fld_`, `out_`, `rep_`, `pth_`, `cfg_`, `trm_`, or `scr_`
 - the active `universal_catalog` table keeps `id` and `key` unique
 - applied migrations are recorded in `schema_migrations` with filename and SHA-256 checksum
-- historical row snapshots are recorded in `universal_catalog_revisions` when active rows are inserted or materially updated
+- full row-history snapshots are intentionally not retained by default; disk space and active data integrity take priority over exhaustive audit history
 - the register schema stays PostgreSQL-oriented rather than SQLite-oriented
 - skill-local markdown templates remain in their relevant skill bundles instead of being duplicated here
 - `src/` must stay read-only and executor-injected instead of owning database connections or write paths

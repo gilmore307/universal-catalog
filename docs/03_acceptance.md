@@ -63,6 +63,7 @@ Do not maintain a second long-lived acceptance database. The local active databa
 - diff review for storage, docs, and helper-boundary changes
 - successful migration application output
 - migration ledger output from `schema_migrations`
+- explicit note when a change adds storage-amplifying audit/history tables, including why the disk cost is justified
 - note that `OPENCLAW_DATABASE_URL` came from the local active catalog database alias
 - `src/catalog-reader.test.js` output when `src/` changed
 - explicit note that a new or updated item is truly shared rather than project-local
@@ -78,3 +79,4 @@ Reject a change when:
 - a maintained directory loses its boundary README
 - docs and storage drift out of sync about what this repository owns
 - helper code quietly expands into write-side behavior or hides catalog access behind opaque runtime state
+- a change adds full-row history or audit tables for high-volume data without an explicit storage budget and retention decision

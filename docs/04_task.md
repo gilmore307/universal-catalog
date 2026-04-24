@@ -2,7 +2,7 @@
 
 ## Task Status Summary
 
-- `accepted`: 13
+- `accepted`: 14
 - `ready_to_dispatch`: 3
 
 ## Active Tasks
@@ -37,7 +37,8 @@ None.
 - added a dedicated `term` kind and registered the first approved term definitions in the catalog register
 - registered the first secret-alias config reference and added a read-only helper path for resolving secret aliases through the local secrets registry
 - configured the local active PostgreSQL database named `openclaw` and resolved its URL through the `openclaw/database-url` secret alias
-- replaced schema/seed rebuild maintenance with append-only migrations plus the `schema_migrations` ledger and `universal_catalog_revisions` snapshots
+- replaced schema/seed rebuild maintenance with append-only migrations plus the `schema_migrations` ledger
+- removed default full-row revision snapshots so future high-volume data preserves disk headroom and active data integrity over exhaustive row-level audit history
 
 ## Notes
 

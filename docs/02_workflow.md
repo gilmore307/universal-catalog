@@ -19,6 +19,7 @@ Define how shared catalog items are registered, updated, and consumed without bl
 - keep stable ids stable once introduced
 - keep migrations append-only after they are applied
 - do not hand-edit long-lived database rows outside a reviewed migration
+- avoid full-row audit tables for high-volume data unless explicitly justified; preserve data integrity and disk headroom first
 - keep the active row, referenced artifact, and docs aligned in the same change
 - update only the canonical doc home when boundary or decision changes
 - keep `src/` read-only and executor-injected
@@ -48,7 +49,7 @@ Target runtime triggers:
 
 - active `universal_catalog` rows
 - `schema_migrations` ledger rows with migration version, filename, checksum, and applied time
-- `universal_catalog_revisions` snapshots for inserted or materially updated catalog items
+- no full-row revision snapshots by default; preserve active data and the lightweight migration ledger first
 
 ### Workflow
 
