@@ -18,7 +18,7 @@ This repository is managed by OpenClaw. OpenClaw owns project route, docs, accep
 - repository identifiers
 - path values that should be referenced through stable ids
 - script-facing full-address locators for concrete source files used by automation
-- default status vocabularies used by shared task and review artifacts
+- default status vocabularies used by shared task, review, and maintenance artifacts
 - shared non-sensitive configuration values such as the default timezone
 - lightweight helper code for catalog lookup
 
@@ -37,6 +37,8 @@ Do not store secrets, security-sensitive configuration values, runtime trading d
 - `review_readiness`
 - `acceptance_outcome`
 - `test_status`
+- `maintenance_status`
+- `docs_status`
 
 ## Repository layout
 
@@ -49,6 +51,6 @@ Do not store secrets, security-sensitive configuration values, runtime trading d
 
 This repository currently defines the documentation spine, the PostgreSQL register skeleton, an initial read-only Node helper surface under `src/`, and the storage boundary for future output templates under `storage/templates/`.
 
-The active seed currently includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, default status vocabulary values, script entries that provide full addresses for the current helper source files under `src/`, and the first approved term definitions.
+The active seed currently includes the catalog register's own column names, base repo/path/config entries, ratified shared workflow slot fields, default status vocabulary values for task, review, and maintenance artifacts, script entries that provide full addresses for the current helper source files under `src/`, and the first approved term definitions.
 
 Markdown documentation templates and Codex prompt templates now stay in their relevant skills instead of being registered here.

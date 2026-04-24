@@ -84,3 +84,9 @@
 - **Date:** 2026-04-24
 - **Decision:** Add dedicated kinds for `task_lifecycle_state`, `review_readiness`, `acceptance_outcome`, and `test_status`, and register default shared values for each kind in the active seed.
 - **Reason:** Shared task and review artifacts become more automatable when their default value vocabularies are explicit instead of being left fully project-defined.
+
+## DEC-015 Register maintenance and docs status vocabularies
+
+- **Date:** 2026-04-24
+- **Decision:** Add dedicated kinds for `maintenance_status` and `docs_status`, and register default shared values for each kind in the active seed.
+- **Reason:** Maintenance outputs become more stable and automatable when overall maintenance condition and docs-drift condition use explicit default vocabularies instead of staying fully project-defined.

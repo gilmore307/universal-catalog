@@ -14,7 +14,7 @@ This repository is a shared catalog dependency, not an application. It stores th
 - the current active register keeps `id` and `key` unique
 - Git history is sufficient for historical change tracking; no separate SQL history table is required
 - output templates live as files under `storage/templates/` when this repository truly owns them
-- default status vocabularies may be registered as dedicated kinds when they become stable shared values
+- default status vocabularies are registered as dedicated kinds when they become stable shared values
 - skill-local markdown templates remain in the relevant skill bundles instead of being duplicated here
 - the register schema should stay PostgreSQL-oriented rather than SQLite-oriented
 - `src/` now provides a small read-only helper surface built around an injected query executor rather than owning database connections itself

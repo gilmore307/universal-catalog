@@ -12,6 +12,8 @@ const CATALOG_KINDS = Object.freeze([
   'review_readiness',
   'acceptance_outcome',
   'test_status',
+  'maintenance_status',
+  'docs_status',
 ]);
 
 function isCatalogKind(value) {
