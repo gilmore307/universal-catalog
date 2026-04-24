@@ -1,26 +1,38 @@
 # Context
 
-## Why this exists
+## Why This Project Exists
 
-Future trading-oriented services on this server will need a small shared authority for reusable field definitions, output templates, approved term definitions, repository names, shared paths, concrete source-file locators for automation, default status vocabularies, and low-volatility non-sensitive configuration values. Centralizing those entries keeps change reviewable and avoids uncontrolled duplication.
+Multiple OpenClaw-managed projects and automation flows need a small shared authority for reusable field definitions, output templates, approved terms, repository names, shared paths, concrete source-file locators, default status vocabularies, and low-volatility non-sensitive configuration values. Centralizing those entries keeps change reviewable and avoids uncontrolled duplication.
 
-## System role
+## Related Systems
 
-This repository is a shared catalog dependency, not an application. It stores the authoritative active register plus any output-template files that are explicitly approved for catalog use.
-
-## Core assumptions
-
-- each catalog item gets a stable random id such as `fld_R7P1C6LW`, `out_T7M2KQ4P`, `rep_H6S3V8LA`, `pth_A7K3P2Q9`, `cfg_J7D1K5RP`, `trm_NBPU5J5P`, or `scr_YO00DVVP`
-- the current active register keeps `id` and `key` unique
-- Git history is sufficient for historical change tracking; no separate SQL history table is required
-- output templates live as files under `storage/templates/` when this repository truly owns them
-- default status vocabularies are registered as dedicated kinds when they become stable shared values
-- skill-local markdown templates remain in the relevant skill bundles instead of being duplicated here
-- the register schema should stay PostgreSQL-oriented rather than SQLite-oriented
-- `src/` now provides a small read-only helper surface built around an injected query executor rather than owning database connections itself
-
-## Related systems
-
-- future trading-oriented services and automation that consume registered fields, outputs, term definitions, repositories, paths, script locators, shared status vocabularies, and shared config values
+- OpenClaw-managed projects and automation that consume registered fields, outputs, term definitions, repositories, paths, script locators, shared status vocabularies, and shared config values
 - repository-local docs and skills that govern naming, workflow, and acceptance
-- SQL tooling used to read and validate the active register
+- PostgreSQL tooling used to read and validate the active register
+
+## Environment
+
+- PostgreSQL-oriented catalog register under `storage/dictionary/`
+- optional catalog-owned output templates under `storage/templates/`
+- a small read-only Node helper surface under `src/`
+- Git history as the durable change log for catalog evolution
+
+## Dependencies
+
+- a disposable PostgreSQL database for schema and seed verification
+- `psql` for the acceptance path that applies `schema.sql` and `seed.sql`
+- Node.js for the read-only helper tests under `src/`
+
+## OpenClaw / Codex Setup
+
+- OpenClaw owns project route, docs, review, acceptance, naming, and maintenance.
+- Codex may implement bounded repository tasks when explicitly dispatched.
+- The fixed docs spine under `docs/00_scope.md` through `docs/05_decision.md` remains authoritative for this repository.
+
+## Important Constraints
+
+- each catalog item gets a stable id with the correct prefix such as `fld_`, `out_`, `rep_`, `pth_`, `cfg_`, `trm_`, or `scr_`
+- the active register keeps `id` and `key` unique
+- the register schema stays PostgreSQL-oriented rather than SQLite-oriented
+- skill-local markdown templates remain in their relevant skill bundles instead of being duplicated here
+- `src/` must stay read-only and executor-injected instead of owning database connections or write paths

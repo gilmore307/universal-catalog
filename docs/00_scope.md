@@ -2,14 +2,14 @@
 
 ## Purpose
 
-Define the shared catalog layer for server-wide values that future trading-oriented services should reference consistently.
+Define the shared catalog layer for server-wide values, output artifacts, approved terms, source locators, and other stable references that OpenClaw-managed projects and automation should reuse consistently.
 
 ## In Scope
 
 - server-wide field registrations
 - server-wide output template registrations
 - server-wide approved term definitions and glossary entries
-- repository identifiers that should be shared consistently across services
+- repository identifiers that should be shared consistently across projects
 - path values that should be addressed through stable catalog ids
 - script-facing full-address locators for concrete source files used by automation
 - shared non-sensitive configuration defaults such as timezone
@@ -19,13 +19,32 @@ Define the shared catalog layer for server-wide values that future trading-orien
 ## Out of Scope
 
 - secrets, auth material, or security policy
-- sensitive configuration values such as passwords, tokens, or private keys
-- runtime trading, order, position, or market data
+- runtime application data, user content, or operational history
 - project-specific business logic
+- write-side service orchestration or remote control behavior
 - source-code import indirection or module resolution tricks beyond explicit script addresses
 - skill-local markdown templates such as project-doc templates or Codex prompt templates
 - non-catalog documentation debates unrelated to repository purpose
 
 ## Owner Intent
 
-Keep globally shared references explicit, stable, and cheap to change. The repository should reduce downstream edit churn by letting consumers resolve approved values through stable random ids instead of hard-coding volatile values everywhere.
+Keep globally shared references explicit, stable, and cheap to change. The repository should reduce downstream edit churn by letting consumers resolve approved values through stable ids instead of hard-coding volatile values everywhere.
+
+## Boundary Rules
+
+- Only server-wide reusable values and artifacts belong in this repository.
+- The authoritative active register lives under `storage/dictionary/`.
+- Output template files belong under `storage/templates/` only when this repository truly owns them.
+- Script entries point to concrete source files that automation may address directly.
+- `src/` stays read-only and executor-injected rather than growing into connection management or write-side administration.
+- Git history is the change-history layer for catalog evolution.
+
+## Out-of-Scope Signals
+
+A request is outside this repository boundary if it requires:
+
+- a value used by only one project with no shared reuse case
+- a secret or security-sensitive configuration value
+- write-side behavior, command dispatch, or runtime orchestration
+- long-lived application state instead of stable reference data
+- skill-local prompt or markdown guidance that belongs in a skill bundle

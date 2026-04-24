@@ -1,19 +1,44 @@
 # Acceptance
 
-## Consolidated acceptance rules
+## Acceptance Summary
 
-A repository change is accepted only if:
+Current accepted repository slice:
 
-- the docs spine remains complete and coherent for the current project shape
-- each meaningful maintained directory has a boundary `README.md`
-- `storage/dictionary/schema.sql` applies cleanly
-- `storage/dictionary/seed.sql` applies cleanly after the schema
-- catalog item ids use the expected type prefixes and remain stable once introduced
-- output files referenced by catalog entries actually exist when present in the seed data
-- script addresses referenced by catalog entries actually exist when present in the seed data
-- `src/` helpers remain read-only and pass their local tests when that surface changes
+- fixed docs spine for project boundary and decisions
+- PostgreSQL schema and seed data for the active catalog register
+- catalog-owned output-template storage boundary under `storage/templates/`
+- a small read-only helper surface under `src/`
 
-## Required verification
+## Acceptance Rules
+
+### For storage changes
+
+A storage change is acceptable only if:
+
+- the item is truly server-wide rather than project-local
+- `id` and `key` remain unique in the active register
+- `kind`, `payload_format`, and `payload` match the actual artifact
+- any referenced output file or script address actually exists
+
+### For `src/` helper changes
+
+A `src/` change is acceptable only if:
+
+- the helper surface remains read-only
+- the code still accepts an injected PostgreSQL query executor instead of owning connection management
+- raw ids stay concentrated instead of spreading casually across unrelated logic
+- local tests pass for the changed helper surface
+
+### For docs-only changes
+
+A docs-only change is acceptable only if:
+
+- the docs spine remains complete and coherent for the current repository shape
+- each durable fact still has one canonical home
+- docs stay aligned with the real storage and helper boundaries
+- no skill-local markdown template boundary is accidentally moved into this repository
+
+## Verification Commands
 
 Run these commands against a disposable PostgreSQL database from the repository root:
 
@@ -30,13 +55,22 @@ node --test src/catalog-reader.test.js
 
 Use a throwaway local or CI database for this check. SQLite is not an acceptance target for this repository.
 
-## Rejection conditions
+## Required Review Evidence
+
+- diff review for storage, docs, and helper-boundary changes
+- successful schema application output
+- successful seed application output
+- `src/catalog-reader.test.js` output when `src/` changed
+- explicit note that a new or updated item is truly shared rather than project-local
+- explicit note when docs or decisions changed because repository boundary moved
+
+## Rejection Reasons
 
 Reject a change when:
 
 - a supposedly shared item is actually project-local
 - an update silently changes the meaning of an existing stable id
-- the active register breaks schema application
+- the active register breaks schema or seed application
 - a maintained directory loses its boundary README
 - docs and storage drift out of sync about what this repository owns
 - helper code quietly expands into write-side behavior or hides catalog access behind opaque runtime state
