@@ -6,6 +6,7 @@ const CATALOG_KINDS = Object.freeze([
   'repo',
   'path',
   'config',
+  'term',
 ]);
 
 function isCatalogKind(value) {

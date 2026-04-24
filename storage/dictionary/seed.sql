@@ -60,6 +60,11 @@ VALUES
   ('tpl_8LKC0XWR', 'template', 'DOCS_04_TASK_TEMPLATE', 'file', 'storage/templates/docs_04_task.md', 'canonical template for docs/04_task.md'),
   ('tpl_48U2DJ7B', 'template', 'DOCS_05_DECISION_TEMPLATE', 'file', 'storage/templates/docs_05_decision.md', 'canonical template for docs/05_decision.md'),
   ('tpl_A6FNLEIM', 'template', 'DOCS_06_MEMORY_TEMPLATE', 'file', 'storage/templates/docs_06_memory.md', 'canonical template for docs/06_memory.md when that optional file is used'),
+  ('trm_NBPU5J5P', 'term', 'SQL', 'text', 'Structured Query Language; the standard language for querying and managing relational databases.', 'canonical shared definition for SQL'),
+  ('trm_4F58616K', 'term', 'POSTGRESQL', 'text', 'Open-source relational database system used as the target engine for universal-catalog and related server-side data work.', 'canonical shared definition for PostgreSQL'),
+  ('trm_5HE1ZLG6', 'term', 'OPENCLAW', 'text', 'Project sentinel and orchestration layer that owns project route, docs, dispatch, review, and acceptance.', 'canonical shared definition for OpenClaw'),
+  ('trm_RXUP2T7D', 'term', 'CODEX', 'text', 'Coding executor used for bounded implementation tasks under OpenClaw supervision.', 'canonical shared definition for Codex in this workspace'),
+  ('trm_QLKAMITP', 'term', 'UNIVERSAL_CATALOG', 'text', 'Shared catalog repository for stable server-wide referenced values, approved templates, and approved terms.', 'canonical shared definition for universal-catalog'),
   ('rep_H6S3V8LA', 'repo', 'UNIVERSAL_CATALOG_REPO', 'text', 'universal-catalog', 'canonical repository name for this catalog'),
   ('pth_C4X8N2ME', 'path', 'UNIVERSAL_CATALOG_ROOT_PATH', 'text', '/root/projects/universal-catalog', 'repository root path for the universal-catalog checkout'),
   ('cfg_J7D1K5RP', 'config', 'DEFAULT_TIMEZONE', 'text', 'America/New_York', 'default shared timezone for this server');

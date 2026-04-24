@@ -34,7 +34,8 @@
 
 - **Date:** 2026-04-23
 - **Decision:** Start the active register with five allowed `kind` values: `field`, `template`, `repo`, `path`, and `config`.
-- **Reason:** This covers the current shared boundary cleanly without prematurely exploding the catalog taxonomy.
+- **Reason:** This covers the initial shared boundary cleanly without prematurely exploding the catalog taxonomy.
+- **Later change:** `DEC-010` later expanded the current kind set by adding `term`.
 
 ## DEC-007 Keep the initial helper surface read-only and executor-injected
 
@@ -53,3 +54,9 @@
 - **Date:** 2026-04-24
 - **Decision:** Register the canonical root `README.md` template and the fixed-location docs spine templates (`docs/00_scope.md` through `docs/06_memory.md`) as `kind = template` items with file payloads under `storage/templates/`.
 - **Reason:** These are stable reusable file-level artifacts. Registering the files themselves is cleaner than treating every internal heading as a catalog field.
+
+## DEC-010 Add a dedicated `term` kind for approved term definitions
+
+- **Date:** 2026-04-24
+- **Decision:** Add `term` as an allowed `kind` so `universal-catalog` can register approved specialized terms and self-defined project terms with text definitions.
+- **Reason:** Terms and meanings are stable shared reference material, and they should not be forced awkwardly into `field` or `config` entries.

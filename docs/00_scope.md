@@ -8,6 +8,7 @@ Define the shared catalog layer for server-wide values that future trading-orien
 
 - server-wide field registrations
 - server-wide output template registrations
+- server-wide approved term definitions and glossary entries
 - repository identifiers that should be shared consistently across services
 - path or locator values that should be addressed through stable catalog ids
 - shared non-sensitive configuration defaults such as timezone
