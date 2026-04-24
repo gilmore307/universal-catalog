@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-MIGRATIONS_DIR = REPO_ROOT / "storage" / "dictionary" / "migrations"
+MIGRATIONS_DIR = REPO_ROOT / "storage" / "dictionary" / "schema_migrations"
 DEFAULT_DB_URL_FILE = Path("/root/secrets/openclaw/database-url")
 
 

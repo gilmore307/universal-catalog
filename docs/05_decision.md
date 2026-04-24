@@ -139,6 +139,6 @@
 ### DEC-017 Use a long-lived PostgreSQL active database with migrations
 
 - **Date:** 2026-04-24
-- **Decision:** Treat the local PostgreSQL database named `openclaw` as the long-lived OpenClaw database, with `universal_catalog` as the catalog table, and evolve it through append-only migrations under `storage/dictionary/migrations/` applied by `scripts/apply-migrations.py`.
+- **Decision:** Treat the local PostgreSQL database named `openclaw` as the long-lived OpenClaw database, with `universal_catalog` as the catalog table, and evolve it through append-only migrations under `storage/dictionary/schema_migrations/` applied by `scripts/apply-migrations.py`.
 - **Reason:** Future catalog usage may involve much more data, so a seed-file rebuild model would become fragile and drift-prone. A migration ledger lets the database stay active while still keeping changes reviewed and replayable.
 - **Revisit condition:** Revisit only if the repository intentionally moves to a managed migration framework or a runtime service boundary with equivalent ledger and audit guarantees.

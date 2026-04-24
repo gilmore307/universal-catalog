@@ -1,10 +1,10 @@
 # scripts
 
-Operational helpers for maintaining the active `universal-catalog` PostgreSQL database.
+Operational helpers for maintaining the active `openclaw` PostgreSQL database.
 
 ## Files
 
-- `apply-migrations.py` — applies pending SQL migrations from `storage/dictionary/migrations/` to the active database and records them in `schema_migrations`.
+- `apply-migrations.py` — applies pending SQL migrations from `storage/dictionary/schema_migrations/` to the active database and records them in `schema_migrations`.
 
 ## Boundary
 

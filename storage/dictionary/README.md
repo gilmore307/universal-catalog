@@ -1,10 +1,10 @@
 # storage/dictionary
 
-PostgreSQL migration boundary for the active `universal-catalog` register.
+PostgreSQL migration boundary for the active `universal_catalog` table.
 
 ## Files
 
-- `migrations/` — append-only schema and data migrations applied to the long-lived active PostgreSQL database
+- `schema_migrations/` — append-only schema and data migrations applied to the long-lived active PostgreSQL database
 
 ## Current database tables
 

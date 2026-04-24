@@ -13,7 +13,7 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 ## Environment
 
 - long-lived PostgreSQL database named `openclaw` with an active `universal_catalog` table
-- append-only migrations under `storage/dictionary/migrations/`
+- append-only migrations under `storage/dictionary/schema_migrations/`
 - optional catalog-owned output templates under `storage/templates/`
 - a small read-only Node helper surface under `src/`
 - Git history plus the `schema_migrations` database ledger as the durable change log for catalog evolution

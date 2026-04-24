@@ -41,7 +41,7 @@ Target runtime triggers:
 ### Main Owner
 
 - active PostgreSQL database `openclaw`
-- `storage/dictionary/migrations/`
+- `storage/dictionary/schema_migrations/`
 - `scripts/apply-migrations.py`
 
 ### Main Outputs
@@ -76,7 +76,7 @@ Target runtime triggers:
 ### Main Owner
 
 - active PostgreSQL database `openclaw`
-- new append-only migration under `storage/dictionary/migrations/`
+- new append-only migration under `storage/dictionary/schema_migrations/`
 - `storage/templates/` when `kind = output`
 - the relevant docs file when repository boundary or decisions change
 
@@ -91,7 +91,7 @@ Target runtime triggers:
 1. confirm the item belongs to the shared server-wide catalog boundary
 2. check that no existing active item already covers the same concept
 3. assign a stable id with the correct prefix
-4. add an append-only migration under `storage/dictionary/migrations/` that writes the catalog row
+4. add an append-only migration under `storage/dictionary/schema_migrations/` that writes the catalog row
 5. update output template files or script addresses when the kind requires it
 6. apply pending migrations to the active PostgreSQL database named `openclaw`
 7. update docs when the new item changes scope, workflow, acceptance, task state, or project decisions
@@ -113,7 +113,7 @@ Target runtime triggers:
 ### Main Owner
 
 - active PostgreSQL database `openclaw`
-- new append-only migration under `storage/dictionary/migrations/`
+- new append-only migration under `storage/dictionary/schema_migrations/`
 - `storage/templates/` when an existing `output` file changes
 - neighboring docs only when repository boundary or decisions changed
 

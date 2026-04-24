@@ -1,4 +1,4 @@
-# migrations
+# schema_migrations
 
 Append-only PostgreSQL migrations for the active `openclaw` database.
 
