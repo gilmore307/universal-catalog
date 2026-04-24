@@ -11,6 +11,7 @@
 
 - Implemented the initial read-only helper surface under `src/` with kind validation, row mapping, and lookup helpers over an injected PostgreSQL query executor.
 - Registered the first ratified shared workflow slot fields for execution-key templates in `storage/dictionary/seed.sql`.
+- Registered the first ratified shared workflow slot fields for completion-receipt templates in `storage/dictionary/seed.sql`.
 
 ## Notes
 
