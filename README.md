@@ -17,7 +17,7 @@ This repository is managed by OpenClaw. OpenClaw owns project route, docs, accep
 - repository identifiers
 - path or locator values that should be referenced through stable ids
 - shared non-sensitive configuration values such as the default timezone
-- lightweight helper code for catalog lookup when implementation begins
+- lightweight helper code for catalog lookup
 
 Do not store secrets, security-sensitive configuration values, or runtime trading data here.
 
@@ -34,8 +34,8 @@ Do not store secrets, security-sensitive configuration values, or runtime tradin
 - `docs/` — formal project docs spine
 - `storage/dictionary/` — SQL schema and seed data for active catalog items
 - `storage/templates/` — template files referenced by catalog entries
-- `src/` — future helper surface for reading catalog items by id
+- `src/` — read-only helper surface for catalog lookup
 
 ## Current state
 
-This repository currently defines the initial documentation spine and storage skeleton. The seed now bootstraps itself with the catalog register's own column names plus one example each for `repo`, `path`, and `config`.
+This repository currently defines the documentation spine, the PostgreSQL register skeleton, and an initial read-only Node helper surface under `src/`. The seed bootstraps itself with the catalog register's own column names plus one example each for `repo`, `path`, and `config`.

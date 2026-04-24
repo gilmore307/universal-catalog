@@ -15,7 +15,7 @@ This repository is a shared catalog dependency, not an application. It stores th
 - Git history is sufficient for historical change tracking; no separate SQL history table is required
 - templates live as files under `storage/templates/`
 - the register schema should stay PostgreSQL-oriented rather than SQLite-oriented
-- helper code may be added later under `src/` when the first real consumer appears
+- `src/` now provides a small read-only helper surface built around an injected query executor rather than owning database connections itself
 
 ## Related systems
 

@@ -35,3 +35,9 @@
 - **Date:** 2026-04-23
 - **Decision:** Start the active register with five allowed `kind` values: `field`, `template`, `repo`, `path`, and `config`.
 - **Reason:** This covers the current shared boundary cleanly without prematurely exploding the catalog taxonomy.
+
+## DEC-007 Keep the initial helper surface read-only and executor-injected
+
+- **Date:** 2026-04-24
+- **Decision:** Keep the first `src/` helper surface limited to read-only lookup helpers that accept a supplied PostgreSQL query executor instead of owning connection management.
+- **Reason:** This gives downstream services a concrete lookup layer now without prematurely freezing a runtime stack, connection model, or broader application boundary inside `universal-catalog`.

@@ -38,6 +38,7 @@ An update is ready for review only if:
 1. Keep raw random ids concentrated behind helper code when implementation begins.
 2. Resolve values through the catalog helper surface instead of scattering volatile payloads.
 3. Keep business code readable by exposing meaningful local names above the raw id layer.
+4. Prefer thin read-only lookup helpers that accept a supplied PostgreSQL query executor instead of embedding connection management here.
 
 ### WF-003 acceptance
 
@@ -45,3 +46,4 @@ Catalog consumption is ready for review only if:
 - the code depends on stable ids rather than duplicated volatile values
 - raw ids are not spread casually across unrelated business logic
 - the helper surface stays small and clearly scoped to catalog lookup
+- helper code does not silently grow into connection management or write-side catalog administration
