@@ -18,8 +18,10 @@ Define how shared catalog items are registered, updated, and consumed without bl
 - confirm shared server-wide scope before adding a new catalog item
 - keep stable ids stable once introduced
 - keep migrations append-only after they are applied
+- use migrations for schema changes and small static/bootstrap reference data, not bulk data storage
 - do not hand-edit long-lived database rows outside a reviewed migration
 - avoid full-row audit tables for high-volume data unless explicitly justified; preserve data integrity and disk headroom first
+- do not mirror large active datasets into Git as SQL literals; use database storage plus explicit backup/restore policy instead
 - keep the active row, referenced artifact, and docs aligned in the same change
 - update only the canonical doc home when boundary or decision changes
 - keep `src/` read-only and executor-injected
@@ -92,7 +94,7 @@ Target runtime triggers:
 1. confirm the item belongs to the shared server-wide catalog boundary
 2. check that no existing active item already covers the same concept
 3. assign a stable id with the correct prefix
-4. add an append-only migration under `storage/dictionary/schema_migrations/` that writes the catalog row
+4. for small static catalog rows, add an append-only migration under `storage/dictionary/schema_migrations/`; for high-volume data, use a reviewed import path that writes to the active database without committing the full dataset into Git
 5. update output template files or script addresses when the kind requires it
 6. apply pending migrations to the active PostgreSQL database named `openclaw`
 7. update docs when the new item changes scope, workflow, acceptance, task state, or project decisions
@@ -127,7 +129,7 @@ Target runtime triggers:
 ### Workflow
 
 1. confirm the item identity is unchanged; if the concept changed, create a new id instead
-2. add a new append-only migration that updates the active row; do not rewrite an already-applied migration
+2. for small static catalog rows, add a new append-only migration that updates the active row; do not rewrite an already-applied migration
 3. update any referenced output template file when the payload points to an output file under `storage/templates/`
 4. apply pending migrations to the active PostgreSQL database named `openclaw`
 5. update docs only when repository boundary, workflow, task state, or decisions changed

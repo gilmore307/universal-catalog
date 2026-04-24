@@ -20,6 +20,7 @@
 - DEC-016: use `config` entries for secret-alias references, not secret values
 - DEC-017: use a long-lived PostgreSQL active database with append-only migrations and a migration ledger
 - DEC-018: prioritize disk headroom and active data integrity over exhaustive row-level audit history
+- DEC-019: do not mirror high-volume active data into migration files
 
 ## Decisions
 
@@ -151,3 +152,11 @@
 - **Decision:** Do not retain full-row revision snapshots by default for catalog or future high-volume tables. Keep the lightweight migration ledger and Git-reviewed migrations, but avoid storage-amplifying audit tables unless a later task explicitly justifies their disk cost and retention policy.
 - **Reason:** Future OpenClaw-managed data volume may be large while local disk is finite. Active data integrity and recoverability are more important than preserving every historical row version.
 - **Revisit condition:** Revisit only for narrowly scoped tables where audit value clearly outweighs storage cost and a retention budget is documented.
+
+
+### DEC-019 Do not mirror high-volume active data into migration files
+
+- **Date:** 2026-04-24
+- **Decision:** Use schema migrations for database structure and small static/bootstrap reference data only. Do not store future high-volume active datasets as literal SQL rows in Git migrations; those datasets should live in PostgreSQL, with a separate backup/restore policy when needed.
+- **Reason:** Committing large active datasets into migration files duplicates data on disk and turns Git into a second storage source. With finite disk, active data integrity and recoverability matter more than keeping a full textual copy of every row in the repository.
+- **Revisit condition:** Revisit only for small, stable reference datasets where Git review value clearly outweighs the duplication cost.

@@ -2,7 +2,7 @@
 
 ## Task Status Summary
 
-- `accepted`: 14
+- `accepted`: 15
 - `ready_to_dispatch`: 3
 
 ## Active Tasks
@@ -39,6 +39,7 @@ None.
 - configured the local active PostgreSQL database named `openclaw` and resolved its URL through the `openclaw/database-url` secret alias
 - replaced schema/seed rebuild maintenance with append-only migrations plus the `schema_migrations` ledger
 - removed default full-row revision snapshots so future high-volume data preserves disk headroom and active data integrity over exhaustive row-level audit history
+- clarified that migrations are for schema and small static/bootstrap reference data only; future high-volume active datasets should live in the database rather than being duplicated into Git as literal SQL rows
 
 ## Notes
 

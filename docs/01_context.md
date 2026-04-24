@@ -13,7 +13,7 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 ## Environment
 
 - long-lived PostgreSQL database named `openclaw` with an active `universal_catalog` table
-- append-only migrations under `storage/dictionary/schema_migrations/`
+- append-only schema and small bootstrap migrations under `storage/dictionary/schema_migrations/`
 - optional catalog-owned output templates under `storage/templates/`
 - a small read-only Node helper surface under `src/`
 - Git history plus the lightweight `schema_migrations` database ledger as the durable change log for catalog evolution
@@ -37,6 +37,7 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 - the active `universal_catalog` table keeps `id` and `key` unique
 - applied migrations are recorded in `schema_migrations` with filename and SHA-256 checksum
 - full row-history snapshots are intentionally not retained by default; disk space and active data integrity take priority over exhaustive audit history
+- high-volume operational data must not be duplicated into migration files as literal row text; the database is the active store for that data
 - the register schema stays PostgreSQL-oriented rather than SQLite-oriented
 - skill-local markdown templates remain in their relevant skill bundles instead of being duplicated here
 - `src/` must stay read-only and executor-injected instead of owning database connections or write paths
