@@ -2,7 +2,7 @@
 
 ## Task Status Summary
 
-- `accepted`: 10
+- `accepted`: 11
 - `ready_to_dispatch`: 4
 
 ## Active Tasks
@@ -36,9 +36,10 @@ None.
 - added a dedicated `output` kind for catalog-owned output templates
 - added a dedicated `script` kind and registered the current helper source-file addresses under `src/` as full absolute locators for automation
 - added a dedicated `term` kind and registered the first approved term definitions in `storage/dictionary/seed.sql`
+- registered the first secret-alias config reference and added a read-only helper path for resolving secret aliases through the local secrets registry
 
 ## Notes
 
 - This repository is still intentionally small.
 - The current milestone includes both the PostgreSQL register boundary and the minimal read-only helper surface under `src/`.
-- The next accepted storage expansion should keep output templates, script locators, and term definitions inside the same read-only catalog boundary rather than letting them sprawl into unrelated repos.
+- The next accepted storage expansion should keep output templates, script locators, term definitions, and secret-alias config references inside the same read-only catalog boundary rather than letting them sprawl into unrelated repos.

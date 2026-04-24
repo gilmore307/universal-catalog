@@ -2,11 +2,11 @@
 
 ## Why This Project Exists
 
-Multiple OpenClaw-managed projects and automation flows need a small shared authority for reusable field definitions, output templates, approved terms, repository names, shared paths, concrete source-file locators, default status vocabularies, and low-volatility non-sensitive configuration values. Centralizing those entries keeps change reviewable and avoids uncontrolled duplication.
+Multiple OpenClaw-managed projects and automation flows need a small shared authority for reusable field definitions, output templates, approved terms, repository names, shared paths, concrete source-file locators, default status vocabularies, low-volatility non-sensitive configuration values, and secret-alias config references. Centralizing those entries keeps change reviewable and avoids uncontrolled duplication.
 
 ## Related Systems
 
-- OpenClaw-managed projects and automation that consume registered fields, outputs, term definitions, repositories, paths, script locators, shared status vocabularies, and shared config values
+- OpenClaw-managed projects and automation that consume registered fields, outputs, term definitions, repositories, paths, script locators, shared status vocabularies, shared config values, and shared secret-alias config references
 - repository-local docs and skills that govern naming, workflow, and acceptance
 - PostgreSQL tooling used to read and validate the active register
 
@@ -36,3 +36,4 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 - the register schema stays PostgreSQL-oriented rather than SQLite-oriented
 - skill-local markdown templates remain in their relevant skill bundles instead of being duplicated here
 - `src/` must stay read-only and executor-injected instead of owning database connections or write paths
+- catalog `config` entries may point to local secrets-registry aliases, but they must never store secret values or raw secret file contents

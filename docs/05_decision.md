@@ -17,6 +17,7 @@
 - DEC-013: reserve `storage/templates/` for output templates
 - DEC-014: register default status vocabularies as dedicated kinds
 - DEC-015: register maintenance and docs status vocabularies
+- DEC-016: use `config` entries for secret-alias references, not secret values
 
 ## Decisions
 
@@ -125,3 +126,10 @@
 - **Decision:** Add dedicated kinds for `maintenance_status` and `docs_status`, and register default shared values for each kind in the active seed.
 - **Reason:** Maintenance outputs become more stable and automatable when overall maintenance condition and docs-drift condition use explicit default vocabularies instead of staying fully project-defined.
 - **Revisit condition:** Revisit only if those vocabularies are intentionally superseded by another shared governance layer.
+
+### DEC-016 Use `config` entries for secret-alias references, not secret values
+
+- **Date:** 2026-04-24
+- **Decision:** Use `kind = config` to register stable secret-alias references such as token aliases, SSH-key aliases, or password aliases, while keeping the real secret material outside the catalog in the local secrets registry.
+- **Reason:** Consumers need reviewed, shared names for secret references, but the catalog must not expose secret values or become a raw dump of local secret file contents.
+- **Revisit condition:** Revisit only if the catalog later introduces a more specific secret-reference kind across all consumers.

@@ -7,8 +7,11 @@ const {
   CATALOG_KINDS,
   assertCatalogKind,
   createCatalogReader,
+  createSecretResolver,
+  getSecretEntryFromRegistry,
   isCatalogKind,
   mapCatalogItemRow,
+  parseRegistry,
 } = require('./index');
 
 function createRow(overrides) {
@@ -134,5 +137,119 @@ test('createCatalogReader rejects unsupported query result shapes', async () => 
   await assert.rejects(
     () => reader.getItemById('fld_A7K3P2Q9'),
     /Invalid catalog query result: expected an array of rows or an object with a rows array/
+  );
+});
+
+test('parseRegistry rejects invalid JSON and returns object registries', () => {
+  assert.throws(
+    () => parseRegistry('{', '/root/secrets/registry.json'),
+    /is not valid JSON/
+  );
+
+  assert.deepEqual(
+    parseRegistry('{"network-framework":{"companion-token":{"path":"/root/secrets/network-framework/companion-token","kind":"token"}}}', '/root/secrets/registry.json'),
+    {
+      'network-framework': {
+        'companion-token': {
+          path: '/root/secrets/network-framework/companion-token',
+          kind: 'token',
+        },
+      },
+    }
+  );
+});
+
+test('getSecretEntryFromRegistry resolves slash-delimited aliases', () => {
+  const entry = getSecretEntryFromRegistry({
+    github: {
+      pat: {
+        path: '/root/secrets/github/pat',
+        kind: 'token',
+        use: 'git https credential helper',
+      },
+    },
+  }, 'github/pat', '/root/secrets/registry.json');
+
+  assert.deepEqual(entry, {
+    alias: 'github/pat',
+    path: '/root/secrets/github/pat',
+    kind: 'token',
+    use: 'git https credential helper',
+  });
+});
+
+test('createSecretResolver resolves registered secret aliases and loads secret text', async () => {
+  const readCalls = [];
+  const resolver = createSecretResolver(async (sql, params) => {
+    assert.match(sql, /WHERE key = \$1/);
+    assert.deepEqual(params, ['NETWORK_FRAMEWORK_COMPANION_TOKEN_SECRET_ALIAS']);
+
+    return {
+      rows: [
+        createRow({
+          id: 'cfg_P4R8T2LM',
+          kind: 'config',
+          key: 'NETWORK_FRAMEWORK_COMPANION_TOKEN_SECRET_ALIAS',
+          payload: 'network-framework/companion-token',
+          note: 'registered companion token secret alias',
+        }),
+      ],
+    };
+  }, {
+    registryPath: '/root/secrets/registry.json',
+    readFile: async (path, encoding) => {
+      readCalls.push({ path, encoding });
+
+      if (path === '/root/secrets/registry.json') {
+        return JSON.stringify({
+          'network-framework': {
+            'companion-token': {
+              path: '/root/secrets/network-framework/companion-token',
+              kind: 'token',
+              use: 'network-framework phase-1 status companion bearer token',
+            },
+          },
+        });
+      }
+
+      if (path === '/root/secrets/network-framework/companion-token') {
+        return 'secret-value\n';
+      }
+
+      throw new Error(`unexpected read: ${path}`);
+    },
+  });
+
+  assert.equal(
+    await resolver.getSecretAliasByConfigKey('NETWORK_FRAMEWORK_COMPANION_TOKEN_SECRET_ALIAS'),
+    'network-framework/companion-token'
+  );
+  assert.equal(
+    await resolver.getSecretPathByConfigKey('NETWORK_FRAMEWORK_COMPANION_TOKEN_SECRET_ALIAS'),
+    '/root/secrets/network-framework/companion-token'
+  );
+  assert.equal(
+    await resolver.loadSecretTextByConfigKey('NETWORK_FRAMEWORK_COMPANION_TOKEN_SECRET_ALIAS'),
+    'secret-value'
+  );
+  assert.equal(readCalls[0].path, '/root/secrets/registry.json');
+});
+
+test('createSecretResolver rejects non-config items for secret lookup', async () => {
+  const resolver = createSecretResolver(async () => ({
+    rows: [
+      createRow({
+        kind: 'term',
+        key: 'OPENCLAW',
+        payload: 'Project sentinel',
+      }),
+    ],
+  }), {
+    readFile: async () => '{}',
+  });
+
+  await assert.rejects(
+    () => resolver.getSecretAliasByConfigKey('OPENCLAW'),
+    /must be kind=config/
   );
 });

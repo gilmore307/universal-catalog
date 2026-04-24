@@ -13,6 +13,7 @@ Define the shared catalog layer for server-wide values, output artifacts, approv
 - path values that should be addressed through stable catalog ids
 - script-facing full-address locators for concrete source files used by automation
 - shared non-sensitive configuration defaults such as timezone
+- shared secret-alias config references that point to the local secrets registry without exposing secret values
 - SQL storage for the active catalog register
 - repository docs and a small read-only helper surface for catalog lookup
 
@@ -44,7 +45,7 @@ Keep globally shared references explicit, stable, and cheap to change. The repos
 A request is outside this repository boundary if it requires:
 
 - a value used by only one project with no shared reuse case
-- a secret or security-sensitive configuration value
+- a secret or security-sensitive configuration value itself
 - write-side behavior, command dispatch, or runtime orchestration
 - long-lived application state instead of stable reference data
 - skill-local prompt or markdown guidance that belongs in a skill bundle

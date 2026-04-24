@@ -26,6 +26,7 @@ A `src/` change is acceptable only if:
 
 - the helper surface remains read-only
 - the code still accepts an injected PostgreSQL query executor instead of owning connection management
+- any secret-related helper reads only alias references plus the local secrets registry and never stores secret values in the catalog
 - raw ids stay concentrated instead of spreading casually across unrelated logic
 - local tests pass for the changed helper surface
 

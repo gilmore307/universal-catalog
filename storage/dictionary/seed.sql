@@ -83,6 +83,7 @@ VALUES
   ('scr_YO00DVVP', 'script', 'CATALOG_READER_SCRIPT_ADDRESS', 'text', '/root/projects/universal-catalog/src/catalog-reader.js', 'canonical full script address for the catalog reader helper source file'),
   ('scr_MA60CYT4', 'script', 'CATALOG_TYPES_SCRIPT_ADDRESS', 'text', '/root/projects/universal-catalog/src/catalog-types.js', 'canonical full script address for the catalog types helper source file'),
   ('scr_7XQAMNBH', 'script', 'CATALOG_INDEX_SCRIPT_ADDRESS', 'text', '/root/projects/universal-catalog/src/index.js', 'canonical full script address for the catalog entrypoint source file'),
+  ('scr_Q2L6F8MW', 'script', 'SECRET_RESOLVER_SCRIPT_ADDRESS', 'text', '/root/projects/universal-catalog/src/secret-resolver.js', 'canonical full script address for the secret resolver helper source file'),
   ('trm_NBPU5J5P', 'term', 'SQL', 'text', 'Structured Query Language; the standard language for querying and managing relational databases.', 'canonical shared definition for SQL'),
   ('trm_4F58616K', 'term', 'POSTGRESQL', 'text', 'Open-source relational database system used as the target engine for universal-catalog and related server-side data work.', 'canonical shared definition for PostgreSQL'),
   ('trm_5HE1ZLG6', 'term', 'OPENCLAW', 'text', 'Project sentinel and orchestration layer that owns project route, docs, dispatch, review, and acceptance.', 'canonical shared definition for OpenClaw'),
@@ -94,6 +95,6 @@ VALUES
   ('pth_C4X8N2ME', 'path', 'UNIVERSAL_CATALOG_ROOT_PATH', 'text', '/root/projects/universal-catalog', 'repository root path for the universal-catalog checkout'),
   ('pth_R6V1C9TE', 'path', 'NETWORK_FRAMEWORK_ROOT_PATH', 'text', '/root/projects/network-framework', 'repository root path for the network-framework checkout'),
   ('cfg_J7D1K5RP', 'config', 'DEFAULT_TIMEZONE', 'text', 'America/New_York', 'default shared timezone for this server'),
-  ('cfg_P4R8T2LM', 'config', 'NETWORK_FRAMEWORK_COMPANION_TOKEN_ENV', 'text', 'NETWORK_FRAMEWORK_COMPANION_TOKEN', 'approved config name for the phase-1 network-framework companion bearer token environment variable');
+  ('cfg_P4R8T2LM', 'config', 'NETWORK_FRAMEWORK_COMPANION_TOKEN_SECRET_ALIAS', 'text', 'network-framework/companion-token', 'approved config key for the phase-1 network-framework companion bearer token secret alias; the catalog stores the alias reference, not the secret value or file contents');
 
 COMMIT;
