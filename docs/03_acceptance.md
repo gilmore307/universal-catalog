@@ -5,7 +5,7 @@
 Current accepted repository slice:
 
 - fixed docs spine for project boundary and decisions
-- PostgreSQL schema and seed data for the active catalog register
+- PostgreSQL schema and seed data used to rebuild the active catalog register
 - catalog-owned output-template storage boundary under `storage/templates/`
 - a small read-only helper surface under `src/`
 
@@ -41,12 +41,13 @@ A docs-only change is acceptable only if:
 
 ## Verification Commands
 
-Run these commands against a disposable PostgreSQL database from the repository root.
-The local host may resolve `UNIVERSAL_CATALOG_DATABASE_URL` from the secret alias registered by `UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS` (`universal-catalog/database-url`).
+Run these commands against the local active PostgreSQL catalog database named `universal-catalog` from the repository root.
+The local host resolves `UNIVERSAL_CATALOG_DATABASE_URL` from the secret alias registered by `UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS` (`universal-catalog/database-url`).
 
 ```bash
-psql "$UNIVERSAL_CATALOG_DATABASE_URL" -f storage/dictionary/schema.sql
-psql "$UNIVERSAL_CATALOG_DATABASE_URL" -f storage/dictionary/seed.sql
+psql "$UNIVERSAL_CATALOG_DATABASE_URL" -v ON_ERROR_STOP=1 -c 'DROP TABLE IF EXISTS catalog_items;'
+psql "$UNIVERSAL_CATALOG_DATABASE_URL" -v ON_ERROR_STOP=1 -f storage/dictionary/schema.sql
+psql "$UNIVERSAL_CATALOG_DATABASE_URL" -v ON_ERROR_STOP=1 -f storage/dictionary/seed.sql
 ```
 
 When `src/` changes, also run:
@@ -55,14 +56,14 @@ When `src/` changes, also run:
 node --test src/catalog-reader.test.js
 ```
 
-Use a throwaway local or CI database for this check. SQLite is not an acceptance target for this repository.
+Do not maintain a second long-lived acceptance database. The local active database is rebuilt from the versioned schema and seed during catalog maintenance so the SQL files and active register cannot drift silently. SQLite is not an acceptance target for this repository.
 
 ## Required Review Evidence
 
 - diff review for storage, docs, and helper-boundary changes
 - successful schema application output
 - successful seed application output
-- note whether `UNIVERSAL_CATALOG_DATABASE_URL` came from a disposable local secret alias or another throwaway database source
+- note that `UNIVERSAL_CATALOG_DATABASE_URL` came from the local active catalog database alias
 - `src/catalog-reader.test.js` output when `src/` changed
 - explicit note that a new or updated item is truly shared rather than project-local
 - explicit note when docs or decisions changed because repository boundary moved

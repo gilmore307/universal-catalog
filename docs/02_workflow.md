@@ -36,7 +36,8 @@ Target runtime triggers:
 
 ### Main Owner
 
-- `storage/dictionary/seed.sql`
+- active PostgreSQL database `universal-catalog`
+- `storage/dictionary/seed.sql` as the versioned rebuild input
 - `storage/templates/` when `kind = output`
 - the relevant docs file when repository boundary or decisions change
 
@@ -51,12 +52,13 @@ Target runtime triggers:
 1. confirm the item belongs to the shared server-wide catalog boundary
 2. check that no existing active item already covers the same concept
 3. assign a stable id with the correct prefix
-4. add or update the supporting artifact:
+4. add or update the versioned rebuild input:
    - SQL row in `storage/dictionary/seed.sql`
    - output template file in `storage/templates/` when `kind = output`
    - full source-file address in the active row when `kind = script`
    - text definition in the active row when `kind = term`
-5. update docs when the new item changes scope, workflow, acceptance, task state, or project decisions
+5. apply the schema/seed maintenance path to the active PostgreSQL database named `universal-catalog`
+6. update docs when the new item changes scope, workflow, acceptance, task state, or project decisions
 
 ---
 
@@ -74,7 +76,8 @@ Target runtime triggers:
 
 ### Main Owner
 
-- `storage/dictionary/seed.sql`
+- active PostgreSQL database `universal-catalog`
+- `storage/dictionary/seed.sql` as the versioned rebuild input
 - `storage/templates/` when an existing `output` file changes
 - neighboring docs only when repository boundary or decisions changed
 
@@ -87,9 +90,10 @@ Target runtime triggers:
 ### Workflow
 
 1. confirm the item identity is unchanged; if the concept changed, create a new id instead
-2. update the active row in `storage/dictionary/seed.sql`
+2. update the versioned row in `storage/dictionary/seed.sql`
 3. update any referenced output template file when the payload points to an output file under `storage/templates/`
-4. update docs only when repository boundary, workflow, task state, or decisions changed
+4. apply the schema/seed maintenance path to the active PostgreSQL database named `universal-catalog`
+5. update docs only when repository boundary, workflow, task state, or decisions changed
 
 ---
 
@@ -130,7 +134,7 @@ Target runtime triggers:
 
 Across the repository:
 
-1. registration and updates change the active register first
+1. registration and updates change the versioned rebuild input and the active PostgreSQL register in the same maintenance pass
 2. output files or script addresses stay aligned with the active row in the same change
 3. docs move only when repository boundary, task state, workflow, acceptance, or decisions truly changed
 4. consumer code treats this repository as a read-only shared authority rather than a runtime service

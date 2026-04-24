@@ -19,9 +19,9 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 
 ## Dependencies
 
-- a disposable PostgreSQL database for schema and seed verification
+- a local PostgreSQL database named `universal-catalog` for the active catalog register
 - `psql` for the acceptance path that applies `schema.sql` and `seed.sql`
-- a local secret alias for the disposable acceptance database URL, registered as `UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS` with payload `universal-catalog/database-url`
+- a local secret alias for the active catalog database URL, registered as `UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS` with payload `universal-catalog/database-url`
 - Node.js for the read-only helper tests under `src/`
 
 ## OpenClaw / Codex Setup
@@ -38,4 +38,4 @@ Multiple OpenClaw-managed projects and automation flows need a small shared auth
 - skill-local markdown templates remain in their relevant skill bundles instead of being duplicated here
 - `src/` must stay read-only and executor-injected instead of owning database connections or write paths
 - catalog `config` entries may point to local secrets-registry aliases, but they must never store secret values or raw secret file contents
-- the disposable PostgreSQL acceptance database URL may be resolved from the local secret alias `universal-catalog/database-url`; do not commit a concrete connection string into repository docs or config
+- the active PostgreSQL catalog database URL may be resolved from the local secret alias `universal-catalog/database-url`; do not commit a concrete connection string into repository docs or config

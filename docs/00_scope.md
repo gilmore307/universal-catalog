@@ -14,7 +14,7 @@ Define the shared catalog layer for server-wide values, output artifacts, approv
 - script-facing full-address locators for concrete source files used by automation
 - shared non-sensitive configuration defaults such as timezone
 - shared secret-alias config references that point to the local secrets registry without exposing secret values
-- SQL storage for the active catalog register
+- SQL schema and seed storage for rebuilding the active catalog register
 - repository docs and a small read-only helper surface for catalog lookup
 
 ## Out of Scope
@@ -34,7 +34,7 @@ Keep globally shared references explicit, stable, and cheap to change. The repos
 ## Boundary Rules
 
 - Only server-wide reusable values and artifacts belong in this repository.
-- The authoritative active register lives under `storage/dictionary/`.
+- The active register lives in the local PostgreSQL database named `universal-catalog`; `storage/dictionary/` owns the versioned schema and seed used to rebuild it.
 - Output template files belong under `storage/templates/` only when this repository truly owns them.
 - Script entries point to concrete source files that automation may address directly.
 - `src/` stays read-only and executor-injected rather than growing into connection management or write-side administration.
