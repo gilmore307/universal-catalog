@@ -95,6 +95,17 @@ VALUES
   ('pth_C4X8N2ME', 'path', 'UNIVERSAL_CATALOG_ROOT_PATH', 'text', '/root/projects/universal-catalog', 'repository root path for the universal-catalog checkout'),
   ('pth_R6V1C9TE', 'path', 'NETWORK_FRAMEWORK_ROOT_PATH', 'text', '/root/projects/network-framework', 'repository root path for the network-framework checkout'),
   ('cfg_J7D1K5RP', 'config', 'DEFAULT_TIMEZONE', 'text', 'America/New_York', 'default shared timezone for this server'),
-  ('cfg_P4R8T2LM', 'config', 'NETWORK_FRAMEWORK_COMPANION_TOKEN_SECRET_ALIAS', 'text', 'network-framework/companion-token', 'approved config key for the phase-1 network-framework companion bearer token secret alias; the catalog stores the alias reference, not the secret value or file contents');
+  ('cfg_P4R8T2LM', 'config', 'NETWORK_FRAMEWORK_COMPANION_TOKEN_SECRET_ALIAS', 'text', 'network-framework/companion-token', 'approved config key for the phase-1 network-framework companion bearer token secret alias; the catalog stores the alias reference, not the secret value or file contents'),
+  ('cfg_V7R3N9SK', 'config', 'NETWORK_FRAMEWORK_INSTALLER_KIND', 'text', 'nsis', 'approved installer technology for the network-framework packaged Windows client'),
+  ('cfg_L2Q8M5TX', 'config', 'NETWORK_FRAMEWORK_COMMAND_CONSOLE_POLICY', 'text', 'hide_command_consoles_show_gui', 'approved packaged-client policy: hide command-line console windows while preserving GUI/tray surfaces'),
+  ('cfg_C9W4P7RA', 'config', 'NETWORK_FRAMEWORK_LOCAL_CONFIG_STORE', 'text', 'project_config_boundary', 'approved packaged-client local settings boundary; do not introduce Windows Registry-backed settings in this slice'),
+  ('cfg_H5N1K8VD', 'config', 'NETWORK_FRAMEWORK_INSTALL_PATH_KEY', 'text', 'installPath', 'approved local config key for the network-framework installed app path'),
+  ('cfg_T6Y2B9LM', 'config', 'NETWORK_FRAMEWORK_NODE_NAME_KEY', 'text', 'nodeName', 'approved local config key for the network-framework OpenClaw node name'),
+  ('cfg_P3F7X1QK', 'config', 'NETWORK_FRAMEWORK_VPN_SERVICE_NAME', 'text', 'Tailscale', 'approved default VPN service name for the network-framework packaged client'),
+  ('cfg_R8D4M2NZ', 'config', 'NETWORK_FRAMEWORK_OPENCLAW_NODE_SERVICE_NAME', 'text', 'OpenClawNode', 'approved default OpenClaw Node service name for the network-framework packaged client'),
+  ('cfg_W1J6C8LP', 'config', 'NETWORK_FRAMEWORK_SMB_DRIVE_LETTER_KEY', 'text', 'smbDriveLetter', 'approved local config key for the network-framework SMB drive letter'),
+  ('cfg_N9K3V5QA', 'config', 'NETWORK_FRAMEWORK_SMB_REMOTE_PATH_KEY', 'text', 'smbRemotePath', 'approved local config key for the network-framework SMB UNC path'),
+  ('cfg_B4L8T2XC', 'config', 'NETWORK_FRAMEWORK_DASHBOARD_URL_KEY', 'text', 'dashboardUrl', 'approved local config key for the network-framework dashboard URL'),
+  ('cfg_X6M1R9PW', 'config', 'NETWORK_FRAMEWORK_COMPANION_STATUS_URL_KEY', 'text', 'companionStatusUrl', 'approved local config key for the network-framework read-only companion status URL');
 
 COMMIT;
