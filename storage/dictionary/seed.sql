@@ -35,6 +35,11 @@ VALUES
   ('fld_GXYBK246', 'field', 'ISSUE_LIST', 'text', 'issue_list', 'canonical shared field name for issue list slots'),
   ('fld_VTD4KDTM', 'field', 'TEMPORARY_NEW_NAMES', 'text', 'temporary_new_names', 'canonical shared field name for temporary new name slots'),
   ('fld_6RJNNWV1', 'field', 'REVIEW_READINESS', 'text', 'review_readiness', 'canonical shared field name for review readiness slots'),
+  ('fld_GI3OL5K5', 'field', 'ACCEPTANCE_OUTCOME', 'text', 'acceptance_outcome', 'canonical shared field name for acceptance outcome slots'),
+  ('fld_Q9KQLPH4', 'field', 'REVIEWED_FILES', 'text', 'reviewed_files', 'canonical shared field name for reviewed file list slots'),
+  ('fld_6XFD3B1C', 'field', 'REVIEWED_COMMANDS', 'text', 'reviewed_commands', 'canonical shared field name for reviewed command list slots'),
+  ('fld_BJGL5P8K', 'field', 'NEXT_TASK_REFERENCE', 'text', 'next_task_reference', 'canonical shared field name for next task reference slots'),
+  ('fld_XYGQ3TIC', 'field', 'ACCEPTANCE_SUMMARY', 'text', 'acceptance_summary', 'canonical shared field name for acceptance summary slots'),
   ('rep_H6S3V8LA', 'repo', 'UNIVERSAL_CATALOG_REPO', 'text', 'universal-catalog', 'canonical repository name for this catalog'),
   ('pth_C4X8N2ME', 'path', 'UNIVERSAL_CATALOG_ROOT_PATH', 'text', '/root/projects/universal-catalog', 'repository root path for the universal-catalog checkout'),
   ('cfg_J7D1K5RP', 'config', 'DEFAULT_TIMEZONE', 'text', 'America/New_York', 'default shared timezone for this server');
