@@ -2,7 +2,7 @@
 
 ## Queued
 
-- Extend the seed set beyond the current bootstrap field, repo, path, and config examples.
+- Continue extending the seed set as additional shared templates and cross-project fields are ratified.
 - Add the first approved template files and related template catalog items.
 - Add a repeatable PostgreSQL-backed verification path in local tooling or CI.
 - Add the first real consumer integration example for the `src/` helper surface.
@@ -10,6 +10,7 @@
 ## Completed
 
 - Implemented the initial read-only helper surface under `src/` with kind validation, row mapping, and lookup helpers over an injected PostgreSQL query executor.
+- Registered the first ratified shared workflow slot fields for execution-key templates in `storage/dictionary/seed.sql`.
 
 ## Notes
 

@@ -38,4 +38,4 @@ Do not store secrets, security-sensitive configuration values, or runtime tradin
 
 ## Current state
 
-This repository currently defines the documentation spine, the PostgreSQL register skeleton, and an initial read-only Node helper surface under `src/`. The seed bootstraps itself with the catalog register's own column names plus one example each for `repo`, `path`, and `config`.
+This repository currently defines the documentation spine, the PostgreSQL register skeleton, and an initial read-only Node helper surface under `src/`. The seed now includes the catalog register's own column names, base repo/path/config entries, and the first ratified shared workflow slot fields for execution-key templates.

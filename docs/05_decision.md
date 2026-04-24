@@ -41,3 +41,9 @@
 - **Date:** 2026-04-24
 - **Decision:** Keep the first `src/` helper surface limited to read-only lookup helpers that accept a supplied PostgreSQL query executor instead of owning connection management.
 - **Reason:** This gives downstream services a concrete lookup layer now without prematurely freezing a runtime stack, connection model, or broader application boundary inside `universal-catalog`.
+
+## DEC-008 Register ratified shared workflow slot fields one template at a time
+
+- **Date:** 2026-04-24
+- **Decision:** When a reusable cross-project workflow template is ratified, register its canonical shared field names in `universal-catalog` under `kind = field`.
+- **Reason:** This keeps skill-template slot names and catalog governance aligned without pretending undecided wrappers, enums, or full schemas are already standardized.
