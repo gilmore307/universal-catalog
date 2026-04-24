@@ -157,6 +157,6 @@
 ### DEC-019 Do not mirror high-volume active data into migration files
 
 - **Date:** 2026-04-24
-- **Decision:** Use schema migrations for database structure and small static/bootstrap reference data only. Do not store future high-volume active datasets as literal SQL rows in Git migrations; those datasets should live in PostgreSQL, with a separate backup/restore policy when needed.
+- **Decision:** Use schema migrations for database schema version evolution and only extremely small, stable lookup/bootstrap rows that schema or code directly depends on. Do not store future high-volume active datasets as literal SQL rows in Git migrations; those datasets should live in PostgreSQL, with a separate backup/restore policy when needed.
 - **Reason:** Committing large active datasets into migration files duplicates data on disk and turns Git into a second storage source. With finite disk, active data integrity and recoverability matter more than keeping a full textual copy of every row in the repository.
-- **Revisit condition:** Revisit only for small, stable reference datasets where Git review value clearly outweighs the duplication cost.
+- **Revisit condition:** Revisit only for tiny, stable lookup/bootstrap rows where schema/code dependency and Git review value clearly outweigh duplication cost.

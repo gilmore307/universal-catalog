@@ -11,6 +11,29 @@ PostgreSQL migration boundary for the active `universal_catalog` table.
 - `schema_migrations` — applied migration ledger with version, filename, SHA-256 checksum, and applied time
 - `universal_catalog` — active catalog rows consumed by read-only helpers and downstream projects
 
+
+## Migration responsibility rule
+
+Migrations manage database schema version evolution.
+
+Migrations are responsible for:
+
+- creating, modifying, and dropping table structures
+- adding, removing, and changing columns
+- creating indexes
+- creating constraints, foreign keys, and uniqueness rules
+- creating necessary schema-level objects
+- recording how the database structure moves from one version to another
+- inserting only extremely small, stable lookup/bootstrap rows that schema or code directly depends on
+
+Migrations are not responsible for:
+
+- ordinary business data
+- test data
+- data produced during user/runtime operation
+- large initialization datasets
+- frequently changing configuration data
+
 ## Notes
 
 The active `universal_catalog` table lives in PostgreSQL database `openclaw`. Migrations are the reviewed change path for schema and data evolution; do not keep a separate long-lived acceptance database and do not hand-edit active rows outside reviewed migrations. Full-row revision snapshots are not retained by default because disk headroom and active data integrity take priority over exhaustive audit history. SQLite is intentionally not a target for this repository.

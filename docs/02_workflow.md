@@ -18,7 +18,8 @@ Define how shared catalog items are registered, updated, and consumed without bl
 - confirm shared server-wide scope before adding a new catalog item
 - keep stable ids stable once introduced
 - keep migrations append-only after they are applied
-- use migrations for schema changes and small static/bootstrap reference data, not bulk data storage
+- use migrations for schema version evolution and only extremely small stable lookup/bootstrap rows that schema or code directly depends on
+- do not use migrations for ordinary business data, test data, runtime-generated data, large initialization datasets, or frequently changing configuration data
 - do not hand-edit long-lived database rows outside a reviewed migration
 - avoid full-row audit tables for high-volume data unless explicitly justified; preserve data integrity and disk headroom first
 - do not mirror large active datasets into Git as SQL literals; use database storage plus explicit backup/restore policy instead

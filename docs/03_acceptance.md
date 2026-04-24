@@ -64,6 +64,7 @@ Do not maintain a second long-lived acceptance database. The local active databa
 - successful migration application output
 - migration ledger output from `schema_migrations`
 - explicit note when a change adds storage-amplifying audit/history tables, including why the disk cost is justified
+- explicit note when a migration inserts lookup/bootstrap rows, confirming they are extremely small, stable, and directly required by schema or code
 - explicit note when a change would commit bulk data into Git, including why database-only storage is not sufficient
 - note that `OPENCLAW_DATABASE_URL` came from the local active catalog database alias
 - `src/catalog-reader.test.js` output when `src/` changed
@@ -81,4 +82,4 @@ Reject a change when:
 - docs and storage drift out of sync about what this repository owns
 - helper code quietly expands into write-side behavior or hides catalog access behind opaque runtime state
 - a change adds full-row history or audit tables for high-volume data without an explicit storage budget and retention decision
-- a change stores high-volume active data as literal SQL rows in migration files instead of using the active database plus backup/restore policy
+- a change stores ordinary business data, test data, runtime-generated data, large initialization datasets, frequently changing configuration, or high-volume active data as literal SQL rows in migration files instead of using the active database plus backup/restore policy
