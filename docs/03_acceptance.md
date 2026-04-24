@@ -41,7 +41,8 @@ A docs-only change is acceptable only if:
 
 ## Verification Commands
 
-Run these commands against a disposable PostgreSQL database from the repository root:
+Run these commands against a disposable PostgreSQL database from the repository root.
+The local host may resolve `UNIVERSAL_CATALOG_DATABASE_URL` from the secret alias registered by `UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS` (`universal-catalog/database-url`).
 
 ```bash
 psql "$UNIVERSAL_CATALOG_DATABASE_URL" -f storage/dictionary/schema.sql
@@ -61,6 +62,7 @@ Use a throwaway local or CI database for this check. SQLite is not an acceptance
 - diff review for storage, docs, and helper-boundary changes
 - successful schema application output
 - successful seed application output
+- note whether `UNIVERSAL_CATALOG_DATABASE_URL` came from a disposable local secret alias or another throwaway database source
 - `src/catalog-reader.test.js` output when `src/` changed
 - explicit note that a new or updated item is truly shared rather than project-local
 - explicit note when docs or decisions changed because repository boundary moved

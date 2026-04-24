@@ -106,6 +106,7 @@ VALUES
   ('cfg_W1J6C8LP', 'config', 'NETWORK_FRAMEWORK_SMB_DRIVE_LETTER_KEY', 'text', 'smbDriveLetter', 'approved local config key for the network-framework SMB drive letter'),
   ('cfg_N9K3V5QA', 'config', 'NETWORK_FRAMEWORK_SMB_REMOTE_PATH_KEY', 'text', 'smbRemotePath', 'approved local config key for the network-framework SMB UNC path'),
   ('cfg_B4L8T2XC', 'config', 'NETWORK_FRAMEWORK_DASHBOARD_URL_KEY', 'text', 'dashboardUrl', 'approved local config key for the network-framework dashboard URL'),
-  ('cfg_X6M1R9PW', 'config', 'NETWORK_FRAMEWORK_COMPANION_STATUS_URL_KEY', 'text', 'companionStatusUrl', 'approved local config key for the network-framework read-only companion status URL');
+  ('cfg_X6M1R9PW', 'config', 'NETWORK_FRAMEWORK_COMPANION_STATUS_URL_KEY', 'text', 'companionStatusUrl', 'approved local config key for the network-framework read-only companion status URL'),
+  ('cfg_U8C2D6YA', 'config', 'UNIVERSAL_CATALOG_DATABASE_URL_SECRET_ALIAS', 'text', 'universal-catalog/database-url', 'approved config key for the disposable PostgreSQL acceptance database URL secret alias; the catalog stores the alias reference, not connection secret material');
 
 COMMIT;
