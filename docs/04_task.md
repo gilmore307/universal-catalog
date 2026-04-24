@@ -2,9 +2,9 @@
 
 ## Queued
 
-- Rename the repository path and Git remote from `universal-dictionary` to `universal-catalog` when you want the external rename work done.
 - Add the first approved real catalog items and template files.
 - Implement the initial helper surface under `src/` when the first consuming service is ready.
+- Add a repeatable PostgreSQL-backed verification path in local tooling or CI.
 
 ## Notes
 

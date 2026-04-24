@@ -23,3 +23,9 @@
 - **Date:** 2026-04-23
 - **Decision:** Keep a single active catalog table in SQL and rely on Git history for change history.
 - **Reason:** A separate SQL history table adds complexity without enough value for the current repository stage.
+
+## DEC-005 Stay off SQLite
+
+- **Date:** 2026-04-23
+- **Decision:** Keep the catalog schema PostgreSQL-oriented rather than SQLite-oriented.
+- **Reason:** Future trading-oriented services are expected to lean heavily on SQL, so the repository should align with a server-grade SQL path instead of a lightweight SQLite target.

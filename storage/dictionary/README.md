@@ -1,6 +1,6 @@
 # storage/dictionary
 
-SQL source of truth for the active catalog register.
+PostgreSQL-oriented SQL source of truth for the active catalog register.
 
 ## Files
 
@@ -9,4 +9,4 @@ SQL source of truth for the active catalog register.
 
 ## Notes
 
-This directory keeps only the active register. Change history lives in Git rather than a separate SQL history table.
+This directory keeps only the active register. Change history lives in Git rather than a separate SQL history table. SQLite is intentionally not a target for this repository.

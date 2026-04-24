@@ -13,14 +13,14 @@ A repository change is accepted only if:
 
 ## Required verification
 
-Run these commands from the repository root:
+Run these commands against a disposable PostgreSQL database from the repository root:
 
 ```bash
-sqlite3 /tmp/universal-catalog.acceptance.db < storage/dictionary/schema.sql
-sqlite3 /tmp/universal-catalog.acceptance.db < storage/dictionary/seed.sql
+psql "$UNIVERSAL_CATALOG_DATABASE_URL" -f storage/dictionary/schema.sql
+psql "$UNIVERSAL_CATALOG_DATABASE_URL" -f storage/dictionary/seed.sql
 ```
 
-Delete or overwrite the temporary database freely after verification.
+Use a throwaway local or CI database for this check. SQLite is not an acceptance target for this repository.
 
 ## Rejection conditions
 

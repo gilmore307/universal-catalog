@@ -1,5 +1,5 @@
 -- Active catalog register schema.
--- Apply with: sqlite3 /tmp/universal-catalog.db < storage/dictionary/schema.sql
+-- Target engine: PostgreSQL.
 
 CREATE TABLE IF NOT EXISTS catalog_items (
   id TEXT PRIMARY KEY,
@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS catalog_items (
   payload_format TEXT NOT NULL CHECK (payload_format IN ('text', 'file')),
   payload TEXT NOT NULL,
   note TEXT,
-  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE INDEX IF NOT EXISTS idx_catalog_items_kind

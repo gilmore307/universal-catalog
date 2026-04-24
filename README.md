@@ -2,8 +2,6 @@
 
 Shared catalog for server-wide field definitions, output templates, and other stable referenced values used by future trading-oriented projects.
 
-> Note: the local path and Git remote may still use the earlier `universal-dictionary` name until repository rename work is completed.
-
 ## Purpose
 
 - centralize server-wide catalog items that should be reviewed instead of duplicated

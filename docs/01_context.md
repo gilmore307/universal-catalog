@@ -14,6 +14,7 @@ This repository is a shared catalog dependency, not an application. It stores th
 - the current active register keeps `id` and `key` unique
 - Git history is sufficient for historical change tracking; no separate SQL history table is required
 - templates live as files under `storage/templates/`
+- the register schema should stay PostgreSQL-oriented rather than SQLite-oriented
 - helper code may be added later under `src/` when the first real consumer appears
 
 ## Related systems
