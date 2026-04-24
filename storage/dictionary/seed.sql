@@ -10,6 +10,9 @@ VALUES
   ('fld_B6J4N8XP', 'field', 'CATALOG_ITEM_PAYLOAD', 'text', 'payload', 'canonical column name for catalog_items.payload'),
   ('fld_D3W7K1RM', 'field', 'CATALOG_ITEM_NOTE', 'text', 'note', 'canonical column name for catalog_items.note'),
   ('fld_P8L2C4TY', 'field', 'CATALOG_ITEM_CREATED_AT', 'text', 'created_at', 'canonical column name for catalog_items.created_at'),
-  ('fld_Q5F9M2NZ', 'field', 'CATALOG_ITEM_UPDATED_AT', 'text', 'updated_at', 'canonical column name for catalog_items.updated_at');
+  ('fld_Q5F9M2NZ', 'field', 'CATALOG_ITEM_UPDATED_AT', 'text', 'updated_at', 'canonical column name for catalog_items.updated_at'),
+  ('rep_H6S3V8LA', 'repo', 'UNIVERSAL_CATALOG_REPO', 'text', 'universal-catalog', 'canonical repository name for this catalog'),
+  ('pth_C4X8N2ME', 'path', 'UNIVERSAL_CATALOG_ROOT_PATH', 'text', '/root/projects/universal-catalog', 'repository root path for the universal-catalog checkout'),
+  ('cfg_J7D1K5RP', 'config', 'DEFAULT_TIMEZONE', 'text', 'America/New_York', 'default shared timezone for this server');
 
 COMMIT;

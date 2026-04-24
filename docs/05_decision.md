@@ -29,3 +29,9 @@
 - **Date:** 2026-04-23
 - **Decision:** Keep the catalog schema PostgreSQL-oriented rather than SQLite-oriented.
 - **Reason:** Future trading-oriented services are expected to lean heavily on SQL, so the repository should align with a server-grade SQL path instead of a lightweight SQLite target.
+
+## DEC-006 Start with five catalog kinds
+
+- **Date:** 2026-04-23
+- **Decision:** Start the active register with five allowed `kind` values: `field`, `template`, `repo`, `path`, and `config`.
+- **Reason:** This covers the current shared boundary cleanly without prematurely exploding the catalog taxonomy.

@@ -2,7 +2,7 @@
 
 ## Queued
 
-- Extend the seed set beyond the bootstrap catalog-column field examples.
+- Extend the seed set beyond the current bootstrap field, repo, path, and config examples.
 - Add the first approved template files and related template catalog items.
 - Implement the initial helper surface under `src/` when the first consuming service is ready.
 - Add a repeatable PostgreSQL-backed verification path in local tooling or CI.

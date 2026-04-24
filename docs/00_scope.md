@@ -8,13 +8,16 @@ Define the shared catalog layer for server-wide values that future trading-orien
 
 - server-wide field registrations
 - server-wide output template registrations
+- repository identifiers that should be shared consistently across services
 - path or locator values that should be addressed through stable catalog ids
+- shared non-sensitive configuration defaults such as timezone
 - SQL storage for the active catalog register
 - repository docs and a future helper surface for catalog lookup
 
 ## Out of Scope
 
 - secrets, auth material, or security policy
+- sensitive configuration values such as passwords, tokens, or private keys
 - runtime trading, order, position, or market data
 - project-specific business logic
 - source-code import indirection or module resolution tricks

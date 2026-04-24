@@ -14,10 +14,20 @@ This repository is managed by OpenClaw. OpenClaw owns project route, docs, accep
 
 - field registrations
 - output templates
+- repository identifiers
 - path or locator values that should be referenced through stable ids
+- shared non-sensitive configuration values such as the default timezone
 - lightweight helper code for catalog lookup when implementation begins
 
-Do not store secrets, security configuration, or runtime trading data here.
+Do not store secrets, security-sensitive configuration values, or runtime trading data here.
+
+## Initial kind set
+
+- `field`
+- `template`
+- `repo`
+- `path`
+- `config`
 
 ## Repository layout
 
@@ -28,4 +38,4 @@ Do not store secrets, security configuration, or runtime trading data here.
 
 ## Current state
 
-This repository currently defines the initial documentation spine and storage skeleton. The first seed examples can be the catalog register's own column names so the repository bootstraps itself with a tiny real dataset.
+This repository currently defines the initial documentation spine and storage skeleton. The seed now bootstraps itself with the catalog register's own column names plus one example each for `repo`, `path`, and `config`.
