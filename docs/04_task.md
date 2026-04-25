@@ -2,7 +2,7 @@
 
 ## Task Status Summary
 
-- `accepted`: 15
+- `accepted`: 16
 - `ready_to_dispatch`: 3
 
 ## Active Tasks
@@ -40,6 +40,7 @@ None.
 - replaced schema/seed rebuild maintenance with append-only migrations plus the `schema_migrations` ledger
 - removed default full-row revision snapshots so future high-volume data preserves disk headroom and active data integrity over exhaustive row-level audit history
 - clarified that migrations are for schema and small static/bootstrap reference data only; future high-volume active datasets should live in the database rather than being duplicated into Git as literal SQL rows
+- registered network-framework Internet proxy VPN defaults for the Tailscale exit-node slice: provider, exit-node config key, LAN-access config key, and default exit-node host name
 
 ## Notes
 
